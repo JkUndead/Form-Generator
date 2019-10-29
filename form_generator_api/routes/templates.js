@@ -15,10 +15,16 @@ router.route('/:templateId')
 	.put(templateHelpers.updateTemplate) //update that template
 	.delete(templateHelpers.deleteTemplate); //delete that template
 
-//For all
+//For all elements
 router.route('/:templateId/elements')
 	.get(elementHelpers.getElements)
 	.post(elementHelpers.createElements);
+
+//For each elements
+router.route('/:templateId/elements/:elementId')
+	.get(elementHelpers.getElement)
+	.put(elementHelpers.updateElement)
+	.delete(elementHelpers.deleteElement);
 
 module.exports = router;
 

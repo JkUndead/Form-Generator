@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import * as apiCalls from '../../services/templates_api';
+import FormErrors from '../../components/FormErrors';
 
 class UpdateTemplate extends Component {
     constructor(props) {
@@ -11,7 +12,18 @@ class UpdateTemplate extends Component {
             description: "",
             duration: "",
             confirmation_status: false,
-            elements: []
+            elements: [],
+            titleValid: true,
+            ownerValid: true,
+            descValid: true,
+            durationValid: true,
+            formValid: false,
+            formErrors: {
+                title: "",
+                owner: "",
+                description: "",
+                duration: "",
+            }
 
         }
         this.handleChange = this.handleChange.bind(this);
@@ -44,10 +56,60 @@ class UpdateTemplate extends Component {
     }
 
 
-    handleChange(event) {
+    handleChange(event){
         const name = event.target.name;
         const value = event.target.value;
-        this.setState({ [name]: value });
+        this.setState({[name]: value},
+            () => { this.validateField(name,value) });
+    }
+
+    validateField(field, value) {
+        let fieldValidationErr = this.state.formErrors;
+        let titleValid = this.state.titleValid;
+        let ownerValid = this.state.ownerValid;
+        let descValid = this.state.descValid;
+        let durationValid = this.state.durationValid;
+        switch(field) {
+            case "title":
+                titleValid = value.length >= 5;
+                fieldValidationErr.title = titleValid? "" : "is too short";
+                break;
+            case "owner":
+                ownerValid = value.length > 0;
+                fieldValidationErr.owner = ownerValid? "" : "is not selected";
+                break;
+            case "description":
+                descValid = value.length >= 20;
+                fieldValidationErr.description = descValid? "" : "is too short";
+                break;
+            case "duration":
+                durationValid = value.length > 0;
+                fieldValidationErr.duration = durationValid? "" : "cannot be blank";
+                break;
+            default:
+                break;
+        }
+        this.setState({
+            formErrors: fieldValidationErr,
+            titleValid: titleValid,
+            ownerValid: ownerValid,
+            descValid: descValid,
+            durationValid: durationValid,
+        }, this.validateForm)
+    }
+
+    validateForm(){
+        this.setState({formValid: 
+            this.state.confirmation_status &&
+            this.state.titleValid &&
+            this.state.ownerValid &&
+            this.state.durationValid &&
+            this.state.descValid
+        });
+    }
+
+    errorClass(err) {
+        return(err.length === 0? "" : "has-error");
     }
 
     handleSubmit(event) {
@@ -57,9 +119,13 @@ class UpdateTemplate extends Component {
     }
 
     render() {
-        const { title, owner, description, duration, confirmation_status } = this.state;
+        const { title, owner, description, duration} = this.state;
         return (
-            <div>
+            <div className="container">
+                <h1 className="text-center">EDIT</h1>
+                <div className="panel panel-default">
+                    <FormErrors formErrors={this.state.formErrors} />
+                </div>
                 <form>
                     <div className="form-group">
                         <label htmlFor="title">Title: </label>
@@ -125,14 +191,20 @@ class UpdateTemplate extends Component {
                         className="form-check-input" 
                         id="declaration" 
                         name="confirmation_status" 
-                        checked={confirmation_status === "true"} 
-                        value="true" 
-                        onChange={this.handleChange} 
+                        value= "check"
+                        onChange={()=>{
+                            this.setState(prevState => (
+                                {confirmation_status: !prevState.confirmation_status}
+                            ), this.validateForm)
+                        }}        
                         required />
                         <label className="form-check-label" htmlFor="declaration">This is my final submission!</label>
                     </div>
                     <Link to="/templates">
-                        <button className="btn btn-primary" onClick={this.handleSubmit}>Submit</button>
+                        <button 
+                        className="btn btn-primary" 
+                        onClick={this.handleSubmit} 
+                        disabled={!this.state.formValid}>Submit</button>
                     </Link>
                 </form>
             </div>

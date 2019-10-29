@@ -2,12 +2,18 @@ const db = require('../models');
 
 //For all elements
 exports.getElements = function(req,res){
-	db.Element.find()
-	.then((foundElements)=>{
-		res.json(foundElements);
-	}).catch((err)=>{
+	db.Template.findById(req.params.templateId)
+	.then(foundTemplate => {
+		db.Element.find()
+		.then((foundElements)=>{
+			res.json(foundElements);
+		}).catch((err)=>{
+			res.send(err);
+		});
+	}).catch(err =>{
 		res.send(err);
-	});
+	})
+	
 }
 
 exports.createElements = function(req,res){
@@ -22,7 +28,7 @@ exports.createElements = function(req,res){
 //======================//
 //For one specific element
 exports.getElement = function(req,res){
-	db.Element.findById(req.params.ElementId)
+	db.Element.findById(req.params.elementId)
 	.then(foundElement =>{
 		res.json(foundElement);
 	}).catch(err=>{

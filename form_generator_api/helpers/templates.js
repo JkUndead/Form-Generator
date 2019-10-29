@@ -22,7 +22,7 @@ exports.createTemplates = function(req,res){
 //======================//
 //For one specific template
 exports.getTemplate = function(req,res){
-	db.Template.findById(req.params.templateId)
+	db.Template.findById(req.params.templateId).populate('elements').exec()
 	.then(foundTemplate =>{
 		res.json(foundTemplate);
 	}).catch(err=>{
