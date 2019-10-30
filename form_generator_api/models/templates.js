@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const Element = require('./elements');
+const User = require('./users');
 
 const templateSchema = new mongoose.Schema({
 	title: {
@@ -23,11 +24,27 @@ const templateSchema = new mongoose.Schema({
 		default: false
 	},
 	elements: [
-		{
+		{	
 			type: mongoose.Schema.Types.ObjectId,
-			ref: 'Element'
+			ref: 'Element'	
 		}
-	]
+	],
+	managers: [
+		{
+			id:{
+				type: mongoose.Schema.Types.ObjectId,
+				ref: 'User'
+			},
+			managerName: String
+		}
+	],
+	author: {
+		id:{
+			type: mongoose.Schema.Types.ObjectId,
+			ref: 'User'
+		},
+		authorName: String
+	}
 });
 
 //cascading delete

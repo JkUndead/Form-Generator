@@ -19,3 +19,5 @@ mongoose.Promise = Promise;
 
 module.exports.Template = require('./templates');
 module.exports.Element = require('./elements');
+module.exports.Users = require('./users');
+module.exports.Forms = require('./forms');

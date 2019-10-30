@@ -5,8 +5,8 @@ import Login from "../pages/login";
 import Templates from "../pages/templatePage";
 import NewTemplates from "../pages/templatePage/newTemplate";
 import UpdateTemplate from "../pages/templatePage/editTemplate";
-import Forms from "../pages/forms";
-import Approval from "../pages/approval";
+import Forms from "../pages/formPage";
+import Approval from "../pages/approvalPage";
 import NotFoundPage from "../pages/404";
 
 const Main = () => {
@@ -29,12 +29,19 @@ const Main = () => {
                 <NewTemplates />
             </Route>
 
-            <Route exact path="/templates/:id" component={UpdateTemplate}/>
+            <Route 
+                exact 
+                path="/templates/:id" 
+                component={UpdateTemplate}
+            />
 
-            <Route exact path="/forms">
-                <Forms />
-            </Route>
-
+            <Route 
+                exact 
+                path="/forms" 
+                render={(props) => <Forms {...props} 
+                isAuthed={true}/>}
+            />
+                
 
             <Route exact path="/approvals">
                 <Approval />

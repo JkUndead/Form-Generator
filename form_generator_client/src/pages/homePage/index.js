@@ -17,12 +17,22 @@ const Homepage = () => {
                         </Link>
                     </li>
                     <li>
-                        <Link to='/forms'>
+                        <Link to={{
+                            pathname: '/forms',
+                            state: {
+                                header: 'Staff'
+                            } 
+                        }}>
                             <button className="btn btn-success">Staff</button>
                         </Link>
                     </li>
                     <li>
-                        <Link to='/forms'>
+                        <Link to={{
+                            pathname: '/forms',
+                            state: {
+                                header: 'Student'
+                            } 
+                        }}>
                             <button className="btn btn-success">Student</button>
                         </Link>
                     </li>
