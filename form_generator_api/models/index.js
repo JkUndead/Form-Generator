@@ -5,7 +5,8 @@ const url = process.env.DB_URL;
 mongoose.connect(url,{
  	useNewUrlParser: true,
 	useCreateIndex: true,
-	useFindAndModify: false
+	useFindAndModify: false,
+	useUnifiedTopology: true
 })
 .then(()=>{
 	console.log("Connect to DB");

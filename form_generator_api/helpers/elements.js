@@ -1,39 +1,36 @@
 const db = require('../models');
 
 //For all elements
-exports.getElements = function(req,res){
+exports.createElement = function(req,res,next){
 	db.Template.findById(req.params.templateId)
-	.then(foundTemplate => {
-		db.Element.find()
-		.then((foundElements)=>{
-			res.json(foundElements);
-		}).catch((err)=>{
-			res.send(err);
-		});
-	}).catch(err =>{
-		res.send(err);
-	})
+	.then(template => {
+		db.Element.create(req.body)
+			.then(newElement => {
+				template.elements.push(newElement);
+				template.save();
+				res.status(201).json(newElement);
+			}).catch(err => {
+				res.send(err);
+			})
+	}).catch(next);
 	
-}
-
-exports.createElements = function(req,res){
-	db.Element.create(req.body)
-	.then((newElement)=>{
-		res.status(201).json(newElement);
-	}).catch((err)=>{
-		res.send(err);
-	})
 }
 
 //======================//
 //For one specific element
 exports.getElement = function(req,res){
-	db.Element.findById(req.params.elementId)
-	.then(foundElement =>{
-		res.json(foundElement);
-	}).catch(err=>{
+	db.Template.findById(req.params.id)
+	.then(() => {
+		db.Element.findById(req.params.elementId)
+		.then(foundElement =>{
+			res.json(foundElement);
+		}).catch(err=>{
+			res.send(err);
+		});
+	}).catch(err => {
 		res.send(err);
-	});
+	})
+	
 }
 
 exports.updateElement = function(req,res){

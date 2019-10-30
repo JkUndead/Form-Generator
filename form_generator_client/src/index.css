@@ -1,12 +1,12 @@
-* {
-	margin: 0;
-	padding: 0;
-	box-sizing: border-box;
+html,
+body,
+#app,
+#app>div {
+  height: 100%
 }
 
 body {
-	font: 400 15px/1.8 Lato, sans-serif;
-	color: #black;
+  padding-bottom: 20px;
 }
 
 code {
@@ -16,22 +16,21 @@ code {
 
 
 /* Navbar */
-.navbar-brand
-{
-	Position: relative;
-	bottom: 20px;
+.navbar-brand {
+  Position: relative;
+  bottom: 20px;
 
-	}
+}
 
 .navbar {
-	
-	margin-bottom: 0;
-	background-color: #DA1D2C;
-	
-	height:60px;
-	width:100%;
-	
-	opacity: 0.9;
+
+  margin-bottom: 0;
+  background-color: #DA1D2C;
+
+  height: 60px;
+  width: 100%;
+
+  opacity: 0.9;
 }
 
 /* Home page */
@@ -41,26 +40,28 @@ code {
   /* Add the blur effect */
   filter: blur(8px);
   -webkit-filter: blur(8px);
-  
-  
+
+
   /* Full height */
-  
-  
+
+
   /* Center and scale the image nicely */
   background-position: relative;
   background-repeat: no-repeat;
   background-size: cover;
-	top: 0;
-	left: 0;
-	width: 100%;
-	height: 100%;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
 }
-  
-  /* Position text in the middle of the page/image */
+
+/* Position text in the middle of the page/image */
 .bg-text {
   font-size: 12px;
-  background-color: rgb(0,0,0); /* Fallback color */
-  background-color: rgba(0,0,0, 0.4); /* Black w/opacity/see-through */
+  background-color: rgb(0, 0, 0);
+  /* Fallback color */
+  background-color: rgba(0, 0, 0, 0.4);
+  /* Black w/opacity/see-through */
   color: white;
   font-weight: bold;
   border: 3px solid #f1f1f1;
@@ -74,8 +75,9 @@ code {
   text-align: center;
 }
 
-.bg-text h1,h2 {
-  font-family:  Lato, sans-serif;
+.bg-text h1,
+h2 {
+  font-family: Lato, sans-serif;
 }
 
 #role_links {
@@ -89,53 +91,45 @@ ul li {
 }
 
 
-  
+
 #AboutUs {
-  background-color:white;
+  background-color: white;
 }
-  
-.wrapper {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  z-index: 2;
-  width: 80%;
-  padding: 20px;
-  text-align: center;
-}
-  
+
+
+
 /* Login Form */
 .form-signin {
-    max-width: 380px;
-    padding: 15px 35px 45px;
-    margin: 0 auto;
-    background-color: #fff;
-    border: 1px solid rgba(0,0,0,0.1);
-  
+  max-width: 380px;
+  padding: 15px 35px 45px;
+  margin: 0 auto;
+  background-color: #fff;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+
   .form-signin-heading,
   .checkbox {
-      margin-bottom: 30px;
+    margin-bottom: 30px;
   }
-  
-  
+
+
   .form-control {
     position: relative;
     font-size: 16px;
     height: auto;
     padding: 10px;
     @include box-sizing(border-box);
-     &:focus {
-       z-index: 2;
+
+    &:focus {
+      z-index: 2;
     }
   }
-  
+
   input[type="text"] {
     margin-bottom: -1px;
     border-bottom-left-radius: 0;
     border-bottom-right-radius: 0;
   }
-  
+
   input[type="password"] {
     margin-bottom: 20px;
     border-top-left-radius: 0;
@@ -143,3 +137,82 @@ ul li {
   }
 }
 
+/* Pop-up box */
+.popup {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.popup_inner {
+  position: absolute;
+  left: 26%;
+  right: 26%;
+  top: 20%;
+  bottom: 40%;
+  margin: auto;
+  border-radius: 20px;
+  background: white;
+}
+
+/* Sidebar */
+body {
+  overflow-x: hidden;
+}
+
+#sidebar-wrapper {
+  min-height: 100vh;
+  margin-left: -15rem;
+  -webkit-transition: margin .25s ease-out;
+  -moz-transition: margin .25s ease-out;
+  -o-transition: margin .25s ease-out;
+  transition: margin .25s ease-out;
+}
+
+#sidebar-wrapper .sidebar-heading {
+  padding: 0.875rem 1.25rem;
+  font-size: 1.2rem;
+}
+
+#sidebar-wrapper .list-group {
+  width: 15rem;
+}
+
+#page-content-wrapper {
+  min-width: 100vw;
+}
+
+#wrapper.toggled #sidebar-wrapper {
+  margin-left: 0;
+}
+
+@media (min-width: 768px) {
+  #sidebar-wrapper {
+    margin-left: 0;
+  }
+
+  #page-content-wrapper {
+    min-width: 0;
+    width: 100%;
+  }
+
+  #wrapper.toggled #sidebar-wrapper {
+    margin-left: -15rem;
+  }
+
+  a {
+    font-family: arial;
+    font-size: 20px;
+  }
+
+  .sidebar-heading {
+    font-family: sans-serif;
+    font-size: 50px !important;
+  }
+}

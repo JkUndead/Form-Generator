@@ -6,7 +6,7 @@ const FormErrors = ({formErrors}) =>
             if(formErrors[field].length > 0){
                 return (
                     <div>
-                        <h3>Error:</h3>
+                        <b>Error:</b>
                         <p key={i}>{field} <i>{formErrors[field]}</i> </p>
                     </div> 
                 )

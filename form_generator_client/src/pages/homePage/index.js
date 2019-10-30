@@ -1,10 +1,12 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import About from '../components/About';
+import About from './components/About';
+import Background_Img from "../../images/Background2.png"
 
 const Homepage = () => {
     return (
         <div className="Homepage">
+            <img src = {Background_Img} alt="background-img" className="Background" />
             <div className="bg-text">
                 <h1>Welcome to Form Gererator</h1>
                 <h2> The Application Help You to Create and Manipulate Thousand of Form !!</h2>

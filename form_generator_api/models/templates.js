@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const Element = require('./elements');
 
 const templateSchema = new mongoose.Schema({
 	title: {
@@ -31,7 +32,7 @@ const templateSchema = new mongoose.Schema({
 
 //cascading delete
 templateSchema.pre('remove', async function() {
-	await Element.remove({
+	await Element.deleteMany({
 		_id: {
 			$in: this.elements
 		}

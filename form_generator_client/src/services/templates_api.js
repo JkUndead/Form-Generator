@@ -1,6 +1,15 @@
+import * as apiCalls from './elements_api';
+
 const APIURL = '/api/templates/';
 
 
+/* elements apiCalls */
+
+const addElement = async function(value,url) {
+    await apiCalls.createElement(value,url);
+}
+
+/* For all templtes */
 export async function getTemplates() {
     return fetch(APIURL)
         .then(res => {
@@ -19,6 +28,7 @@ export async function getTemplates() {
         })
 }
 
+///CREATE TEMPLATE
 export async function createTemplate(templateObj){
     const title = templateObj.title,
         owner = templateObj.owner,
@@ -26,7 +36,6 @@ export async function createTemplate(templateObj){
         duration = templateObj.duration,
         confirmation_status = templateObj.confirmation_status,
         elements = templateObj.elements;
-
 	return fetch(APIURL, {
 		method: 'post',
 		headers: new Headers({
@@ -37,10 +46,9 @@ export async function createTemplate(templateObj){
             owner: owner, 
             description: description, 
             duration: duration, 
-            confirmation_status: confirmation_status, 
-            elements: elements
+            confirmation_status: confirmation_status
         })
-	})
+    })
 	.then(res =>{
 		if(!res.ok) {
 			if(res.status >= 400 && res.status < 500) {
@@ -53,8 +61,15 @@ export async function createTemplate(templateObj){
 				throw err;
 			}
 		}
-		return res.json();
-	})
+		return res.json().then(newTemplate => {
+            const templateId = newTemplate._id;
+            const eURL = APIURL + templateId + '/elements';
+            elements.forEach((element) =>{
+                addElement(element,eURL); 
+            })
+            
+        });
+    })
 }
 
 

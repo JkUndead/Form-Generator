@@ -40,8 +40,9 @@ exports.updateTemplate = function(req,res){
 }
 
 exports.deleteTemplate = function(req,res){
-	db.Template.deleteOne({_id: req.params.templateId})
-	.then(()=>{
+	db.Template.findById({_id: req.params.templateId})
+	.then((foundTemplate)=>{
+		foundTemplate.remove();
 		res.json({message: 'It is gone!'});
 	}).catch(err=>{
 		res.send(err);

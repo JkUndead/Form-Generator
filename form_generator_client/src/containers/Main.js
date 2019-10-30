@@ -1,19 +1,17 @@
 import React from 'react';
 import { Switch, Route, Redirect } from "react-router-dom";
-import Homepage from "../pages";
+import Homepage from "../pages/homePage";
 import Login from "../pages/login";
-import Templates from "../pages/templatePage/templates";
+import Templates from "../pages/templatePage";
 import NewTemplates from "../pages/templatePage/newTemplate";
 import UpdateTemplate from "../pages/templatePage/editTemplate";
 import Forms from "../pages/forms";
-import Background_Img from "../images/Background2.png"
 import Approval from "../pages/approval";
 import NotFoundPage from "../pages/404";
 
 const Main = () => {
     return (
       <div className="Main">
-        <img src = {Background_Img} alt="background-img" className="Background" />
         <Switch>
             
             <Route exact path="/" >

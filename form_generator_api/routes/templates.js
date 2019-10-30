@@ -17,8 +17,7 @@ router.route('/:templateId')
 
 //For all elements
 router.route('/:templateId/elements')
-	.get(elementHelpers.getElements)
-	.post(elementHelpers.createElements);
+	.post(elementHelpers.createElement);
 
 //For each elements
 router.route('/:templateId/elements/:elementId')
