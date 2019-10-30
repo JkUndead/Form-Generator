@@ -9,8 +9,8 @@ const SideBar = ({ header, listItems }) => {
         />
     ))
     return (
-        <div className="bg-light border-right" id="sidebar-wrapper">
-            <div className="sidebar-heading">{header}</div>
+        <div className="bg-dark border-right" id="sidebar-wrapper">
+            <div className="text-light sidebar-heading">{header}</div>
             {items}
         </div>
     )

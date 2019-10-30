@@ -38,12 +38,14 @@ class TemplateList extends Component {
             <div id="page-content-wrapper">
                 <div className="container-fluid">
                     <h1 className="mt-4">My Templates</h1>
-                    <ul>
-                        {templates}
-                    </ul>
                     <Link to="/templates/new">
                         <button className="btn btn-primary">Create New Template</button>
                     </Link>
+                    <hr></hr>
+                    <ul>
+                        {templates}
+                    </ul>
+                    
                 </div>
 
             </div>

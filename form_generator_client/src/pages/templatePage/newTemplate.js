@@ -102,6 +102,11 @@ class NewTemplate extends Component {
         ));
     }
 
+    removeElement(id) {
+        let elements = this.state.elements;
+        elements.splice(id,1);
+        this.setState({elements: elements});
+    }
 
     handleSubmit(event) {
         this.addTemplate(this.state);
@@ -116,11 +121,12 @@ class NewTemplate extends Component {
         return (
             <div className="container">
                 <h1 className="text-center">New Template</h1>
-                <div className="panel panel-default">
-                    <FormErrors formErrors={this.state.formErrors} />
-                </div>
+                
                 <div className="row justify-content-md-center">
                     <div className="col-8">
+                    <div className="panel panel-default">
+                        <FormErrors formErrors={this.state.formErrors} />
+                    </div>
                         <form>
                             <div className={`form-group row ${this.errorClass(this.state.formErrors.title)}`}>
                                 <label className="col-sm-4 col-md-2 col-form-label" htmlFor="title">Title: </label>
@@ -137,8 +143,9 @@ class NewTemplate extends Component {
 
                             </div>
                             <div className={`form-group row ${this.errorClass(this.state.formErrors.owner)}`}>
-                                <div className="form-check-inline">
-                                    <div className="col-sm-4 col-md-5">
+                                    <label className="col-sm-4 col-md-2 col-form-label" htmlFor="owner">Owner:</label>
+                                <div className="col-sm-4 col-md-5 ">
+                                    <div className="form-check-inline">
                                         <input
                                             className="form-check-input"
                                             type="radio"
@@ -153,8 +160,8 @@ class NewTemplate extends Component {
                                         Student
                                         </label>
                                 </div>
-                                <div className="form-check-inline">
-                                    <div className="col-sm-4 col-md-5">
+                                <div className="col-sm-4 col-md-5">
+                                    <div className="form-check-inline">
                                         <input
                                             className="form-check-input"
                                             type="radio"
@@ -202,10 +209,10 @@ class NewTemplate extends Component {
 
 
                         <div className="row">
-                            <ElementList elements={this.state.elements} />
+                            <ElementList elements={this.state.elements} removeElement={this.removeElement.bind(this)} />
                         </div>
                         <div className="row">
-                            <button className="btn btn-outline-success" onClick={this.togglePopup.bind(this)}>Add New Element</button>
+                            <button className="btn btn-outline-primary" onClick={this.togglePopup.bind(this)}>Add New Element</button>
                             {this.state.showPopup ?
                                 <PopUp
                                     text='New Element'
@@ -232,7 +239,7 @@ class NewTemplate extends Component {
                                                 ), this.validateForm)
                                             }}
                                             required />
-                                        <label className="form-check-label" htmlFor="declaration">I confirm the information above is final!</label>
+                                        <label className="form-check-label" htmlFor="declaration">I confirm the above information is... </label>
                                     </div>
                                 </div>
                             </div>

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import * as apiCalls from '../../services/templates_api';
+import * as templateAPICalls from '../../services/templates_api';
+import * as elementAPICalls from '../../services/elements_api';
 import FormErrors from '../../components/FormErrors';
 import ElementList from './components/ElementList';
 import PopUp from '../../components/PopUp'
@@ -40,7 +41,7 @@ class UpdateTemplate extends Component {
     }
 
     async loadOneTemplate(id) {
-        let template = await apiCalls.getOneTemplate(id);
+        let template = await templateAPICalls.getOneTemplate(id);
         const title = template.title,
             owner = template.owner,
             description = template.description,
@@ -56,7 +57,7 @@ class UpdateTemplate extends Component {
     };
 
     async updateTemplate(template, id) {
-        await apiCalls.updateTemplate(template, id);
+        await templateAPICalls.updateTemplate(template, id);
     }
 
 
@@ -129,9 +130,21 @@ class UpdateTemplate extends Component {
         ));
     }
 
+    async removeElement(id) {
+        if (typeof (id) === 'number') {
+            let elements = this.state.elements;
+            elements.splice(id, 1);
+            this.setState({ elements: elements });
+        } else {
+            let elementId = this.props.match.params.id + '/elements/' + id;
+            await elementAPICalls.removeElements(elementId);
+            const elements = this.state.elements.filter(element => element._id !== id)
+            this.setState({ elements: elements })
+        }
+    }
+
     handleSubmit(event) {
         const { match: { params } } = this.props;
-        console.log(this.state);
         this.updateTemplate(this.state, params.id);
     }
 
@@ -140,11 +153,12 @@ class UpdateTemplate extends Component {
         return (
             <div className="container">
                 <h1 className="text-center">EDIT</h1>
-                <div className="panel panel-default">
-                    <FormErrors formErrors={this.state.formErrors} />
-                </div>
+
                 <div className="row justify-content-md-center">
                     <div className="col-8">
+                        <div className="panel panel-default">
+                            <FormErrors formErrors={this.state.formErrors} />
+                        </div>
                         <form>
                             <div className={`form-group row ${this.errorClass(this.state.formErrors.title)}`}>
                                 <label className="col-sm-4 col-md-2 col-form-label" htmlFor="title">Title: </label>
@@ -226,10 +240,10 @@ class UpdateTemplate extends Component {
 
 
                         <div className="row">
-                            <ElementList elements={this.state.elements} />
+                            <ElementList elements={this.state.elements} removeElement={this.removeElement.bind(this)} />
                         </div>
                         <div className="row">
-                            <button className="btn btn-outline-success" onClick={this.togglePopup.bind(this)}>Add New Element</button>
+                            <button className="btn btn-outline-primary" onClick={this.togglePopup.bind(this)}>Add New Element</button>
                             {this.state.showPopup ?
                                 <PopUp
                                     text='New Element'
@@ -256,13 +270,10 @@ class UpdateTemplate extends Component {
                                                 ), this.validateForm)
                                             }}
                                             required />
-                                        <label className="form-check-label" htmlFor="declaration">I confirm the information above is final!</label>
+                                        <label className="form-check-label" htmlFor="declaration">I confirm the above information is...</label>
                                     </div>
                                 </div>
                             </div>
-
-
-
                             <div className=" form-group row">
                                 <div className="col-sm-12">
                                     <Link to="/templates">

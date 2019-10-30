@@ -1,4 +1,4 @@
-
+const APIURL = '/api/templates/';
 
 export async function createElement(elementObj,eURL) {
     const name = elementObj.name;
@@ -26,4 +26,25 @@ export async function createElement(elementObj,eURL) {
         }
         return res.json()
     })
+}
+
+export async function removeElements(id){
+	const deleteURL = APIURL + id;
+	return fetch(deleteURL, {
+		method: 'delete'
+	})
+	.then(res =>{
+		if(!res.ok) {
+			if(res.status >= 400 && res.status < 500) {
+				return res.json().then(data =>{
+					let err = {errorMessage: data.message};
+					throw err;
+				})
+			} else {
+				let err = {errorMessage: 'Server is not responding'};
+				throw err;
+			}
+		}
+		return res.json();
+	})
 }

@@ -19,7 +19,7 @@ exports.createElement = function(req,res,next){
 //======================//
 //For one specific element
 exports.getElement = function(req,res){
-	db.Template.findById(req.params.id)
+	db.Template.findById(req.params.templateId)
 	.then(() => {
 		db.Element.findById(req.params.elementId)
 		.then(foundElement =>{
@@ -42,13 +42,18 @@ exports.updateElement = function(req,res){
 	});
 }
 
+
 exports.deleteElement = function(req,res){
-	db.Element.remove({_id: req.params.elementId})
-	.then(()=>{
-		res.json({message: 'It is gone!'});
-	}).catch(err=>{
-		res.send(err);
+	db.Template.findById(req.params.templateId)
+	.then(() => {
+		db.Element.deleteOne({_id: req.params.elementId})
+		.then(()=>{
+			res.json({message: 'It is gone!'});
+		}).catch(err=>{
+			res.send(err);
+		})
 	})
+	
 }
 
 module.exports = exports;
