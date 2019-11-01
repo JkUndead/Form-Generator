@@ -12,14 +12,11 @@ const formSchema = new mongoose.Schema({
   status: {
     type: String
   },
-  elementValue: [
-    {
-      id: {
-        type: mongoose.Schema.Types.ObjectId
-      },
-      value: {}
-    }
-  ]
+  elementValues:{
+    field: String,
+    value: {}
+  }
+
 })
 
 const Form = mongoose.model('Form', formSchema);
