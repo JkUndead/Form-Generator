@@ -5,6 +5,7 @@ const Approval = () => (
         <SideBar
             header="Manager"
             listItems={["Pending", "Approved", "Rejected"]}
+            paths={["/approval","/approval/approved","/approval/rejected"]}
         />
     </div>
 );

@@ -127,7 +127,7 @@ class PopUp extends Component {
                                     <option name="type" value="">Please Choose...</option>
                                     <option name="type" value="text">text</option>
                                     <option name="type" value="number">number</option>
-                                    <option name="type" value="password">password</option>
+                                    <option name="type" value="date">date</option>
                                 </select>
                             </div>
                         </div>

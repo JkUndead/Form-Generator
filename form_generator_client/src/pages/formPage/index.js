@@ -1,5 +1,6 @@
 import React from 'react';
 import SideBar from "../../components/SideBar";
+import FormList from './components/FormList'
 const Forms = (props) => {
     const header = props.location.state.header;
     return (
@@ -9,6 +10,7 @@ const Forms = (props) => {
                 listItems={["Forms", "Draft", "Sent"]}
                 paths={["/forms","/forms/draft","/forms/sent"]}
             />
+            <FormList header={header}/>
         </div>
     )
 };

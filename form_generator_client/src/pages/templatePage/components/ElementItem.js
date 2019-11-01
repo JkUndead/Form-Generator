@@ -5,10 +5,10 @@ const ElementItem = ({ name, type, onDelete, onUpdate }) => {
 
     return (
         <div className=" form-group row">
-            <label className="col-sm-4 col-md-2 col-form-label">
+            <label className="col-sm-4 col-md-3 col-form-label">
                 {name}:
             </label>
-            <div className="col-sm-8 col-md-10">
+            <div className="col-sm-8 col-md-9">
                 <input className="form-control" type={`${type}`} />
                 <div className="row mt-2 pl-2">
                     <div>

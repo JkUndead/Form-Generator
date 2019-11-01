@@ -149,7 +149,7 @@ class NewTemplate extends Component {
         const { title, owner, description, duration, showUpdate, showPopup, updateId } = this.state;
         return (
             <div className="container">
-                <h1 className="text-center">New Template</h1>
+                <h1 className="text-center mt-4 mb-4">NEW TEMPLATE</h1>
 
                 <div className="row justify-content-md-center">
                     <div className="col-8">
