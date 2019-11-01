@@ -1,7 +1,8 @@
 import React from 'react';
 //import { Link } from 'react-router-dom';
 
-const ElementItem = ({ name, type, onDelete }) => {
+const ElementItem = ({ name, type, onDelete, onUpdate }) => {
+
     return (
         <div className=" form-group row">
             <label className="col-sm-4 col-md-2 col-form-label">
@@ -9,21 +10,25 @@ const ElementItem = ({ name, type, onDelete }) => {
             </label>
             <div className="col-sm-8 col-md-10">
                 <input className="form-control" type={`${type}`} />
-                <span>
-                    <button 
-                        style={{ "display": "inline", "margin": "2px" }} 
-                        className="btn btn-warning"
-                    >Update
+                <div className="row mt-2 pl-2">
+                    <div>
+                        <button
+                            style={{ "display": "inline", "margin": "2px" }}
+                            className="btn btn-warning mr-3"
+                            onClick={onUpdate}
+                        >Update
                     </button>
-                </span>
-                <span>
-                    <button 
-                        style={{ "display": "inline", "margin": "2px" }} 
-                        className="btn btn-danger" 
-                        onClick={onDelete} 
+                    </div>
+                    <div>
+                        <button
+                            style={{ "display": "inline", "margin": "2px" }}
+                            className="btn btn-danger"
+                            onClick={onDelete}
                         >Delete
                     </button>
-                </span>
+                    </div>
+                </div>
+
             </div>
         </div>
     )

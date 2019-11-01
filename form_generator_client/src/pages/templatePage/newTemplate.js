@@ -4,6 +4,7 @@ import * as apiCalls from '../../services/templates_api';
 import FormErrors from '../../components/FormErrors';
 import ElementList from './components/ElementList';
 import PopUp from '../../components/PopUp';
+import TemplateForm from './components/TemplateForm';
 
 class NewTemplate extends Component {
     constructor(props) {
@@ -26,7 +27,9 @@ class NewTemplate extends Component {
                 description: "",
                 duration: "",
             },
-            showPopup: false
+            showPopup: false,
+            showUpdate: false,
+            updateId: ""
         }
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -44,6 +47,36 @@ class NewTemplate extends Component {
         let elements = this.state.elements;
         elements.push(value);
         this.setState({ elements: elements })
+    }
+
+    updateElement(id) {
+        let showUpdate = this.state.showUpdate;
+        this.setState({ showUpdate: !showUpdate });
+        this.setState({ updateId: id })
+    }
+
+    saveEditedElement(value) {
+        const elements = this.state.elements.map((element, index) => {
+            if (index === value.id) {
+                return ({
+                    ...element,
+                    name: value.name,
+                    type: value.type
+                });
+            } else {
+                return element
+            }
+        })
+        this.setState({ 
+            elements: elements,
+            updateId: "" 
+        })
+    }
+
+    removeElement(id) {
+        let elements = this.state.elements;
+        elements.splice(id, 1);
+        this.setState({ elements: elements });
     }
 
     validateField(field, value) {
@@ -102,13 +135,9 @@ class NewTemplate extends Component {
         ));
     }
 
-    removeElement(id) {
-        let elements = this.state.elements;
-        elements.splice(id,1);
-        this.setState({elements: elements});
-    }
 
-    handleSubmit(event) {
+
+    handleSubmit() {
         this.addTemplate(this.state);
     }
 
@@ -117,107 +146,44 @@ class NewTemplate extends Component {
     }
 
     render() {
-        const { title, owner, description, duration } = this.state;
+        const { title, owner, description, duration, showUpdate, showPopup, updateId } = this.state;
         return (
             <div className="container">
                 <h1 className="text-center">New Template</h1>
-                
+
                 <div className="row justify-content-md-center">
                     <div className="col-8">
-                    <div className="panel panel-default">
-                        <FormErrors formErrors={this.state.formErrors} />
-                    </div>
-                        <form>
-                            <div className={`form-group row ${this.errorClass(this.state.formErrors.title)}`}>
-                                <label className="col-sm-4 col-md-2 col-form-label" htmlFor="title">Title: </label>
-                                <div className="col-sm-8 col-md-10">
-                                    <input
-                                        className="form-control"
-                                        type="text"
-                                        id="title"
-                                        name="title"
-                                        value={title}
-                                        onChange={this.handleChange}
-                                        required autoFocus />
-                                </div>
-
-                            </div>
-                            <div className={`form-group row ${this.errorClass(this.state.formErrors.owner)}`}>
-                                    <label className="col-sm-4 col-md-2 col-form-label" htmlFor="owner">Owner:</label>
-                                <div className="col-sm-4 col-md-5 ">
-                                    <div className="form-check-inline">
-                                        <input
-                                            className="form-check-input"
-                                            type="radio"
-                                            id="student"
-                                            name="owner"
-                                            checked={owner === "student"}
-                                            value="student"
-                                            onChange={this.handleChange}
-                                            required />
-                                    </div>
-                                    <label className="form-check-label" name="owner" htmlFor="student">
-                                        Student
-                                        </label>
-                                </div>
-                                <div className="col-sm-4 col-md-5">
-                                    <div className="form-check-inline">
-                                        <input
-                                            className="form-check-input"
-                                            type="radio"
-                                            id="staff"
-                                            name="owner"
-                                            checked={owner === "staff"}
-                                            value="staff"
-                                            onChange={this.handleChange}
-                                            required />
-                                    </div>
-                                    <label className="form-check-label" name="owner" htmlFor="staff">
-                                        Staff
-                                    </label>
-                                </div>
-
-                            </div>
-                            <div className="form-group row">
-                                <label className="col-sm-4 col-md-2 col-form-label" htmlFor="duration">Duration: </label>
-                                <div className="col-sm-8 col-md-10">
-                                    <input
-                                        className="form-control"
-                                        type="text"
-                                        id="duration"
-                                        name="duration"
-                                        onChange={this.handleChange}
-                                        required
-                                        value={duration} />
-                                </div>
-                            </div>
-                            <div className="form-group row">
-                                <label className="col-sm-4 col-md-2 col-form-label" htmlFor="description">Description: </label>
-                                <div className="col-sm-8 col-md-10">
-                                    <textarea
-                                        className="form-control"
-                                        id="description"
-                                        name="description"
-                                        onChange={this.handleChange}
-                                        rows="4"
-                                        cols="50"
-                                        required value={description} />
-                                </div>
-                            </div>
-                        </form>
-
-
+                        <div className="panel panel-default">
+                            <FormErrors formErrors={this.state.formErrors} />
+                        </div>
+                        <TemplateForm
+                            title={title}
+                            owner={owner}
+                            description={description}
+                            duration={duration}
+                            handleChange={this.handleChange.bind(this)}
+                            formErrors={this.state.formErrors}
+                            errorClass={this.errorClass.bind(this)}
+                        />
 
                         <div className="row">
-                            <ElementList elements={this.state.elements} removeElement={this.removeElement.bind(this)} />
+                            <ElementList
+                                elements={this.state.elements}
+                                removeElement={this.removeElement.bind(this)}
+                                updateElement={this.updateElement.bind(this)}
+                                showUpdate={showUpdate}
+                                editElement={this.saveEditedElement.bind(this)}
+                                updateId={updateId}
+                            />
                         </div>
                         <div className="row">
-                            <button className="btn btn-outline-primary" onClick={this.togglePopup.bind(this)}>Add New Element</button>
-                            {this.state.showPopup ?
+                            <button className="btn btn-outline-primary mt-3" onClick={this.togglePopup.bind(this)}>Add New Element</button>
+                            {showPopup ?
                                 <PopUp
                                     text='New Element'
                                     closePopup={this.togglePopup.bind(this)}
                                     addNewElements={this.addNewElements}
+                                    buttonName="Add"
                                 />
                                 : null
                             }
@@ -244,10 +210,8 @@ class NewTemplate extends Component {
                                 </div>
                             </div>
 
-
-
                             <div className=" form-group row">
-                                <div className="col-sm-12">
+                                <div className="col-sm-12 mt-4">
                                     <Link to="/templates">
                                         <button
                                             className="btn btn-outline-secondary"

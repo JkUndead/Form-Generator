@@ -7,6 +7,7 @@ const Forms = (props) => {
             <SideBar
                 header={header}
                 listItems={["Forms", "Draft", "Sent"]}
+                paths={["/forms","/forms/draft","/forms/sent"]}
             />
         </div>
     )

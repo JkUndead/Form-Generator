@@ -1,11 +1,14 @@
 import React from 'react';
 import BarElements from './BarElements';
 
-const SideBar = ({ header, listItems }) => {
+const SideBar = (props) => {
+    const {header,listItems,paths} = {...props};
     const items = listItems.map((item,index) => (
         <BarElements
             key={index}
             item={item}
+            path={paths[index]}
+            header={header}
         />
     ))
     return (

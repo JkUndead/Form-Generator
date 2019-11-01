@@ -6,8 +6,8 @@ const FormErrors = ({formErrors}) =>
             if(formErrors[field].length > 0){
                 return (
                     <div>
-                        <b>Error:</b>
-                        <p key={i}>{field} <i>{formErrors[field]}</i> </p>
+                        <b>Error: </b>
+                        <span key={i}>{field} <i>{formErrors[field]}</i> </span>
                     </div> 
                 )
             } else {

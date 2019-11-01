@@ -31,7 +31,7 @@ exports.getTemplate = function(req,res){
 }
 
 exports.updateTemplate = function(req,res){
-	db.Template.findOneAndUpdate({_id: req.params.templateId}, req.body, {new: true})
+	db.Template.findOneAndUpdate({_id: req.params.templateId}, req.body)
 	.then(template=>{
 		res.json(template);
 	}).catch(err=>{

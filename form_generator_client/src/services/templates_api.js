@@ -137,7 +137,8 @@ export async function updateTemplate(templateObj,id){
                 owner: owner, 
                 description: description, 
                 duration: duration, 
-                confirmation_status: confirmation_status
+                confirmation_status: confirmation_status,
+                elements: elements
             })
         })
         .then(res => {
@@ -152,24 +153,6 @@ export async function updateTemplate(templateObj,id){
                     throw err;
                 }
             }
-            return res.json().then(updatedTemplate => {
-                const templateId = updatedTemplate._id;
-                const eURL = APIURL + templateId + '/elements';
-                let oldLength = updatedTemplate.elements.length;
-                let newLength = elements.length;
-                if(oldLength < newLength && oldLength !== 0) {
-                    console.log(oldLength);
-                    console.log(elements);
-                    const newElements = elements.splice(oldLength);
-                    console.log(newElements)
-                    newElements.forEach((element) =>{
-                        addElement(element,eURL); 
-                    })
-                } else {
-                    elements.forEach((element) =>{
-                        addElement(element,eURL); 
-                    })
-                }
-            });
+            return res.json();
         })
 }

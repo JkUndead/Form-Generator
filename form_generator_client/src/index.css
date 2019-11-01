@@ -154,8 +154,8 @@ ul li {
 
 .popup_inner {
   position: absolute;
-  left: 26%;
-  right: 26%;
+  left: 32%;
+  right: 32%;
   top: 20%;
   bottom: 40%;
   margin: auto;
@@ -194,7 +194,7 @@ body {
   margin-left: 0;
 }
 
-@media (min-width: 768px) {
+@media (min-width: 890px) {
   #sidebar-wrapper {
     margin-left: 0;
   }

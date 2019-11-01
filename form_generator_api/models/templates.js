@@ -29,6 +29,12 @@ const templateSchema = new mongoose.Schema({
 			ref: 'Element'	
 		}
 	],
+	author: {
+		id:{
+			type: mongoose.Schema.Types.ObjectId,
+			ref: 'User'
+		},
+	},
 	managers: [
 		{
 			id:{
@@ -38,19 +44,12 @@ const templateSchema = new mongoose.Schema({
 			managerName: String
 		}
 	],
-	author: {
-		id:{
-			type: mongoose.Schema.Types.ObjectId,
-			ref: 'User'
-		},
-		authorName: String
-	}
 });
 
 //cascading delete
 templateSchema.pre('remove', async function() {
 	await Element.deleteMany({
-		_id: {
+		"_id": {
 			$in: this.elements
 		}
 	});

@@ -37,17 +37,18 @@ class TemplateList extends Component {
         return (
             <div id="page-content-wrapper">
                 <div className="container-fluid">
-                    <h1 className="mt-4">My Templates</h1>
-                    <Link to="/templates/new">
-                        <button className="btn btn-primary">Create New Template</button>
-                    </Link>
-                    <hr></hr>
-                    <ul>
+                    <div className="jumbotron" style={{"marginTop":"20px"}}>
+                        <div className="container">
+                            <h1 className="display-4"><b>My Templates</b></h1>
+                            <Link to="/templates/new">
+                                <button className="btn btn-info btn-lg">Create New Template</button>
+                            </Link>
+                        </div>
+                    </div>
+                    <div className="row" style={{"display":"flex", "flexWrap": "wrap"}} >
                         {templates}
-                    </ul>
-                    
+                    </div>
                 </div>
-
             </div>
         );
     }

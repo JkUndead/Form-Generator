@@ -7,6 +7,7 @@ const Templates = () => (
         <SideBar 
             header="Admin"
             listItems = {["Templates","Draft"]}
+            paths={["/templates","/templates/draft"]}
         />
         <TemplateList />
         

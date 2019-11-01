@@ -1,8 +1,8 @@
 const express = require('express'),
 	  router = express.Router(),
 	  templateHelpers = require('../helpers/templates'),
-	  elementHelpers = require('../helpers/elements'),
-	  db = require('../models');
+	  elementHelpers = require('../helpers/elements');
+	  //db = require('../models');
 
 //For All templates
 router.route('/')
@@ -17,13 +17,13 @@ router.route('/:templateId')
 
 //For all elements
 router.route('/:templateId/elements')
-	.post(elementHelpers.createElement);
+	.post(elementHelpers.createElement); //create new element
 
 //For each elements
 router.route('/:templateId/elements/:elementId')
-	.get(elementHelpers.getElement)
-	.put(elementHelpers.updateElement)
-	.delete(elementHelpers.deleteElement);
+	.get(elementHelpers.getElement) //show one element
+	.put(elementHelpers.updateElement) //update one element
+	.delete(elementHelpers.deleteElement); //delete one element
 
 module.exports = router;
 

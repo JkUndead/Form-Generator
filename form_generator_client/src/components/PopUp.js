@@ -18,7 +18,29 @@ class PopUp extends Component {
         }
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
-        
+
+    }
+
+    componentDidMount() {
+        this.setInitalValue();
+    }
+
+    setInitalValue() {
+        if(typeof(this.props.PopUpElement) !== 'undefined'){
+            let element = this.props.PopUpElement[0];
+            let name = this.state.name,
+                type = this.state.type;
+            name = element.name;
+            type = element.type
+            this.setState({
+                name: name,
+                type: type,
+                nameValid: true,
+                typeValid: true,
+                formValid: true
+            })
+
+        }
     }
 
     handleChange(event) {
@@ -55,27 +77,35 @@ class PopUp extends Component {
         this.setState({
             formValid:
                 this.state.nameValid &&
-                this.state.typeValid 
+                this.state.typeValid
         });
     }
 
-    handleSubmit(event) {
-        const newElement = {name: this.state.name, type: this.state.type}
-        this.props.addNewElements(newElement);
-        this.props.closePopup();
+    handleSubmit() {
+        const newElement = { name: this.state.name, type: this.state.type }
+        if(this.props.text === "New Element") {
+            this.props.addNewElements(newElement);
+            this.props.closePopup();
+        } else {
+            newElement.id = this.props.updateId;
+            this.props.editElement(newElement);
+            this.props.closePopup();
+        }
+        
     }
 
     render() {
         return (
             <div className='popup'>
                 <div className='popup_inner '>
-                    <h1 className='text-center'>{this.props.text}</h1>
+                    <h1 className='text-center mt-3'>{this.props.text}</h1>
                     <div className="panel panel-default">
                         <FormErrors formErrors={this.state.formErrors} />
                     </div>
                     <form>
-                        <div className='form-group'>
-                            <label htmlFor='elementName'>Name:
+                        <div className='form-group row mb-3 mt-3'>
+                            <label className="col-sm-4 col-md-3 text-center col-form-label" htmlFor='elementName'>Name:</label>
+                            <div className="col-sm-6 col-md-8">
                                 <input
                                     className='form-control'
                                     type='text'
@@ -83,9 +113,13 @@ class PopUp extends Component {
                                     id='elementName'
                                     value={this.state.name}
                                     onChange={this.handleChange}
+                                    autoFocus
                                 />
-                            </label>
-                            <div className="input-group mb-3">
+                            </div>
+
+                        </div>
+                        <div className="form-group row justify-content-center">
+                            <div className="col-sm-6 col-md-11 input-group mb-3 input-group mb-3">
                                 <div className="input-group-prepend">
                                     <label className="input-group-text" htmlFor="typeGroup">Type</label>
                                 </div>
@@ -98,13 +132,25 @@ class PopUp extends Component {
                             </div>
                         </div>
                     </form>
-                    <button id='close' className='btn btn-outline-secondary' onClick={this.props.closePopup}>Close</button>
-                    <button 
-                        id='add' 
-                        disabled={!this.state.formValid}
-                        className="btn btn-outline-success"
-                        onClick={this.handleSubmit}
-                    >Add</button>
+                    <div className="row justify-content-center">
+                        <div className="mr-5">
+                            <button
+                                id='close'
+                                className='btn btn-outline-secondary'
+                                onClick={this.props.closePopup}
+                            >Close</button>
+                        </div>
+                        <div className="ml-5">
+                            <button
+                                id='add'
+                                disabled={!this.state.formValid}
+                                className="btn btn-outline-success"
+                                onClick={this.handleSubmit}
+                            >{this.props.buttonName}</button>
+                        </div>
+                    </div>
+
+
                 </div>
             </div>
         );
