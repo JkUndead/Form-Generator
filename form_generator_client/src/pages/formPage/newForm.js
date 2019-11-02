@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import FormElements from './components/FormElements'
 import * as TemplateAPICalls from '../../services/templates_api';
-import FormErrors from '../../components/FormErrors';
+//import FormErrors from '../../components/FormErrors';
 
 class NewForm extends Component {
     constructor(props) {

@@ -46,7 +46,8 @@ export async function createTemplate(templateObj){
             owner: owner, 
             description: description, 
             duration: duration, 
-            confirmation_status: confirmation_status
+            confirmation_status: confirmation_status,
+            //elements: elements
         })
     })
 	.then(res =>{
@@ -60,7 +61,7 @@ export async function createTemplate(templateObj){
 				let err = {errorMessage: 'Server is not responding'};
 				throw err;
 			}
-		}
+        }
 		return res.json().then(newTemplate => {
             const templateId = newTemplate._id;
             const eURL = APIURL + templateId + '/elements';

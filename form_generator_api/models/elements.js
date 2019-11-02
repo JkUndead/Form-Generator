@@ -12,7 +12,8 @@ const elementSchema = new mongoose.Schema({
 	}
 });
 
-elementSchema.pre('remove', function(next) {
+elementSchema.pre('remove', function(next) { 
+	//const arr = this.model('Template').findOne({elements:{}})
 	this.model('Template').updateOne(
 		{
 			elements: [
@@ -20,7 +21,8 @@ elementSchema.pre('remove', function(next) {
 			]
 		},
 		{
-			"$pull" : { elements : [{"_id": this._id}]}
+			"$pullAll" : { elements : [{_id: this._id}]},
+
 		}
 	)
 	.then(() => {

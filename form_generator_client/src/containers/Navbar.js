@@ -4,16 +4,20 @@ import Logo from "../images/Logo2.png";
 
 class Navbar extends Component {
     render() {
-        return(
-            <nav className="navbar navbar-default navbar-fixed-top">
-            <div className="container-fluid">
-                <div className="navbar-header">
-                    <Link to="/" className="navbar-brand">
-                        <img src={Logo} alt="Logo" style={{"maxHeight":"65px", "maxWidth":"inherit"}}/>
-                    </Link>
-                </div>
-            </div>
-            </nav>
+        return (
+            <header>
+                <nav className="navbar navbar-default navbar-fixed-top">
+                    <div className="container-fluid">
+                        <div className="navbar-header">
+                            <Link to="/" className="navbar-brand">
+                                <img src={Logo} alt="Logo" style={{ "maxHeight": "65px", "maxWidth": "inherit" }} />
+                            </Link>
+                        </div>
+                    </div>
+
+                </nav>
+            </header>
+
         );
     }
 }

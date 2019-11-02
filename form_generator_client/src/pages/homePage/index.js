@@ -1,19 +1,22 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import About from './components/About';
-import Background_Img from "../../images/Background2.png"
+import Background_Img from "../../images/Background2.png";
+import Package from './components/Package';
+import ContactUs from './components/ContactUs';
+import Footer from './components/Footer';
 
 const Homepage = () => {
     return (
         <div className="Homepage">
             <img src = {Background_Img} alt="background-img" className="Background" />
             <div className="bg-text">
-                <h1>Welcome to Form Gererator</h1>
-                <h2> The Application Help You to Create and Manipulate Thousand of Form !!</h2>
-                <ul id="role_links">
+                <h1><b>Welcome to Form Gererator</b></h1>
+                
+                <ul id="role_links" style={{"padding": "0"}}>
                     <li>
                         <Link to='/templates'>
-                            <button className="btn btn-primary"> Administrator</button>
+                            <button className="btn btn-primary btn-lg"> Administrator</button>
                         </Link>
                     </li>
                     <li>
@@ -23,7 +26,7 @@ const Homepage = () => {
                                 header: 'Staff'
                             } 
                         }}>
-                            <button className="btn btn-success">Staff</button>
+                            <button className="btn btn-success btn-lg">Staff</button>
                         </Link>
                     </li>
                     <li>
@@ -33,18 +36,23 @@ const Homepage = () => {
                                 header: 'Student'
                             } 
                         }}>
-                            <button className="btn btn-success">Student</button>
+                            <button className="btn btn-success btn-lg">Student</button>
                         </Link>
                     </li>
                     <li>
                         <Link to='/approvals'>
-                            <button className="btn btn-warning">Manager</button>
+                            <button className="btn btn-warning btn-lg">Manager</button>
                         </Link>
                     </li>
                 </ul>
+                
             </div>
+            
             <br></br>
             <About />
+            <Package />
+            <ContactUs />
+            <Footer />
         </div>
     );
 }
