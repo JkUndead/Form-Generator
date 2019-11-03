@@ -21,11 +21,13 @@ class NewTemplate extends Component {
             descValid: false,
             durationValid: false,
             formValid: false,
+            elementsValid: false,
             formErrors: {
                 title: "",
                 owner: "",
                 description: "",
                 duration: "",
+                elements: ""
             },
             showPopup: false,
             showUpdate: false,
@@ -46,7 +48,8 @@ class NewTemplate extends Component {
     addNewElements(value) {
         let elements = this.state.elements;
         elements.push(value);
-        this.setState({ elements: elements })
+        this.setState({ elements: elements },
+            () => { this.validateField(elements, value) })
     }
 
     updateElement(id) {
@@ -76,7 +79,8 @@ class NewTemplate extends Component {
     removeElement(id) {
         let elements = this.state.elements;
         elements.splice(id, 1);
-        this.setState({ elements: elements });
+        this.setState({ elements: elements },
+            () => { this.validateField(elements, id) });
     }
 
     validateField(field, value) {
@@ -85,6 +89,7 @@ class NewTemplate extends Component {
         let ownerValid = this.state.ownerValid;
         let descValid = this.state.descValid;
         let durationValid = this.state.durationValid;
+        let elementsValid = this.state.elementsValid;
         switch (field) {
             case "title":
                 titleValid = value.length >= 5;
@@ -105,12 +110,15 @@ class NewTemplate extends Component {
             default:
                 break;
         }
+        elementsValid = (this.state.elements.length >=5 || this.state.elements.length === 0) ;
+        fieldValidationErr.elements = elementsValid ? "": "are not enough. A template must has at least 5 elements."
         this.setState({
             formErrors: fieldValidationErr,
             titleValid: titleValid,
             ownerValid: ownerValid,
             descValid: descValid,
             durationValid: durationValid,
+            elementsValid: elementsValid
         }, this.validateForm)
     }
 
@@ -121,7 +129,8 @@ class NewTemplate extends Component {
                 this.state.titleValid &&
                 this.state.ownerValid &&
                 this.state.durationValid &&
-                this.state.descValid
+                this.state.descValid &&
+                this.state.elementsValid
         });
     }
 
@@ -146,9 +155,9 @@ class NewTemplate extends Component {
     }
 
     render() {
-        const { title, owner, description, duration, showUpdate, showPopup, updateId } = this.state;
+        const { title, owner, description, duration, elements, showUpdate, showPopup, updateId } = this.state;
         return (
-            <div className="container">
+            <div className="container bg-light">
                 <h1 className="text-center mt-4 mb-4">NEW TEMPLATE</h1>
 
                 <div className="row justify-content-md-center">
@@ -168,7 +177,7 @@ class NewTemplate extends Component {
 
                         <div className="row">
                             <ElementList
-                                elements={this.state.elements}
+                                elements={elements}
                                 removeElement={this.removeElement.bind(this)}
                                 updateElement={this.updateElement.bind(this)}
                                 showUpdate={showUpdate}

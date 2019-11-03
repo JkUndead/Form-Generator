@@ -2,7 +2,7 @@ import React from 'react';
 
 const About = () => (
     <div id="AboutUs" className="container text-center" >
-        <h1 style={{ "margin-bottom": "20px" }}>Our Mission</h1>
+        <h1 style={{ "marginBottom": "20px" }}>Our Mission</h1>
         
         <p >This project was initiated to solve an issue the client, Murdoch University, is facing.
             The issue being they are currently using paper forms which requires manual printing and filling,

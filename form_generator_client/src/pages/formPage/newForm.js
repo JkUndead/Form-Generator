@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import FormElements from './components/FormElements'
 import * as TemplateAPICalls from '../../services/templates_api';
+import * as FormAPICalls from '../../services/forms_api';
 //import FormErrors from '../../components/FormErrors';
 
 class NewForm extends Component {
@@ -10,8 +11,11 @@ class NewForm extends Component {
         this.state = {
             title: "",
             description: "",
-            status: "",
-            confirmation_status: "",
+            templateId: "",
+            userName: "",
+            email: "",
+            role: this.props.location.state.header.toLowerCase(),
+            confirmation_status: false,
             elements: [],
             elementValues: {},
             validValues: false,
@@ -33,24 +37,32 @@ class NewForm extends Component {
         this.setState({
             title: template.title,
             description: template.description,
-            elements: template.elements
+            elements: template.elements,
+            templateId: this.props.location.state.id
         })
     }
 
     handleChange(event) {
         const name = event.target.name;
         const value = event.target.value;
-        this.setState({elementValues:{ ...this.state.elementValues,[name]: value }});
+        if (name !== "userName" && name !== "email") {
+            this.setState({ elementValues: { ...this.state.elementValues, [name]: value } });
+        } else {
+            this.setState({ [name]: value })
+        }
     }
 
-    handleSubmit(event){
-        event.preventDefault();
-        console.log(this.state.elementValues)
+    handleSubmit(event) {
+        this.addForm(this.state)
+    }
+
+    async addForm(value) {
+        await FormAPICalls.createForm(value)
     }
 
     render() {
         const { title, description, elementValues } = this.state;
-        const elements = this.state.elements.map(e=> (
+        const elements = this.state.elements.map(e => (
             <FormElements
                 key={e._id}
                 {...e}
@@ -59,7 +71,7 @@ class NewForm extends Component {
             />
         ))
         return (
-            <div className="container">
+            <div className="container bg-light">
                 <h1 className="text-center mb-4 mt-4">{title}</h1>
                 <div className="row justify-content-md-center">
                     <div className="col-8">
@@ -67,12 +79,67 @@ class NewForm extends Component {
                             <p ><b>Description:</b> <i>{description}</i></p>
 
                         </div>
+                        <div className="border border-info rounded p-3">
+                            <h5>General Information: </h5>
+                            <div className=" form-group row mt-4">
+                                <label className="col-sm-4 col-md-3 col-form-label">
+                                    User Name:
+                            </label>
+                                <div className="col-sm-8 col-md-9">
+                                    <input
+                                        className="form-control"
+                                        onChange={this.handleChange.bind(this)}
+                                        name="userName"
+                                        value={this.state.userName}
+                                        type="text"
+                                        placeholder="Your user name"
+                                        autoFocus
+                                        required
+                                    />
+                                </div>
+                            </div>
+                            <div className=" form-group row mt-4">
+                                <label className="col-sm-4 col-md-3 col-form-label">
+                                    Email:
+                            </label>
+                                <div className="col-sm-8 col-md-9">
+                                    <input
+                                        className="form-control"
+                                        onChange={this.handleChange.bind(this)}
+                                        name="email"
+                                        value={this.state.email}
+                                        type="email"
+                                        placeholder="youremail@email.com"
+                                        required
+                                    />
+                                </div>
+                            </div>
+
+                        </div>
 
                         {elements}
 
 
                         <form>
-
+                            <div className="form-group-row">
+                                <div className="col-sm-8 offset-sm-4 col-md-10 offset-md-2">
+                                    <div className="form-check">
+                                        <input
+                                            type="checkbox"
+                                            className="form-check-input"
+                                            id="declaration"
+                                            name="confirmation_status"
+                                            value="check"
+                                            onChange={() => {
+                                                this.setState(prevState => (
+                                                    { confirmation_status: !prevState.confirmation_status }
+                                                ))
+                                            }}
+                                            required />
+                                        <label className="form-check-label" htmlFor="declaration">I confirm the above information is accurate and followed terms and conditions </label>
+                                    </div>
+                                </div>
+                            </div>
 
                             <div className=" form-group row">
                                 <div className="col-sm-12 mt-4">
@@ -81,7 +148,7 @@ class NewForm extends Component {
                                         state: {
                                             header: this.props.location.state.header
                                         }
-                                        
+
                                     }} >
                                         <button
                                             className="btn btn-outline-secondary"
@@ -89,9 +156,14 @@ class NewForm extends Component {
                                         >Cancel
                                     </button>
                                     </Link>
-                                    <Link to="/forms">
+                                    <Link to={{
+                                        pathname: "/forms",
+                                        state: {
+                                            header: this.props.location.state.header
+                                        }
+
+                                    }} >
                                         <button
-                                            
                                             className="btn btn-outline-primary float-right"
                                             onClick={this.handleSubmit}
                                         >Submit

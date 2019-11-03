@@ -6,16 +6,16 @@ const formSchema = new mongoose.Schema({
     ref: 'Template'
   },
   author: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'User'
+    id: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'User'
+    },
+    username: String
   },
   status: {
     type: String
   },
-  elementValues:{
-    field: String,
-    value: {}
-  }
+  elementValues: {}
 
 })
 

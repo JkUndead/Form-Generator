@@ -25,7 +25,7 @@ const Package = () => (
                 </p>
             </li>
             <li>
-                <i class="fas fa-user-shield fa-4x"></i>
+                <i className="fas fa-user-shield fa-4x"></i>
                 <h4>Role-Based Access</h4>
                 <p>Get access to only what is needed.
                     <br></br>Only see what you want to see

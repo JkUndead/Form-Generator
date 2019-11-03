@@ -22,11 +22,13 @@ class UpdateTemplate extends Component {
             descValid: true,
             durationValid: true,
             formValid: false,
+            elementsValid: true,
             formErrors: {
                 title: "",
                 owner: "",
                 description: "",
                 duration: "",
+                elements: ""
             },
             showPopup: false,
             showUpdate: false,
@@ -74,7 +76,8 @@ class UpdateTemplate extends Component {
     async addNewElements(value) {
         let eURL = '/api/' + this.props.match.url + '/elements'
         let newElement = await elementAPICalls.createElement(value, eURL)
-        this.setState({ elements: [...this.state.elements, newElement] })
+        this.setState({ elements: [...this.state.elements, newElement] },
+            () => { this.validateField(this.state.elements, value) })
     }
 
     updateElement(id) {
@@ -86,8 +89,8 @@ class UpdateTemplate extends Component {
     async saveEditedElement(value) {
         console.log(value);
         let eURL = '/api/' + this.props.match.url + '/elements/' + value.id;
-        let element = {name: value.name, type: value.type}
-        let updateElement = await elementAPICalls.updateElement(element,eURL);
+        let element = { name: value.name, type: value.type }
+        let updateElement = await elementAPICalls.updateElement(element, eURL);
         const elements = this.state.elements.map((element) => {
             if (element._id === updateElement._id) {
                 return ({
@@ -99,9 +102,9 @@ class UpdateTemplate extends Component {
                 return element
             }
         })
-        this.setState({ 
+        this.setState({
             elements: elements,
-            updateId: "" 
+            updateId: ""
         })
     }
 
@@ -111,6 +114,7 @@ class UpdateTemplate extends Component {
         let ownerValid = this.state.ownerValid;
         let descValid = this.state.descValid;
         let durationValid = this.state.durationValid;
+        let elementsValid = this.state.elementsValid;
         switch (field) {
             case "title":
                 titleValid = value.length >= 5;
@@ -131,12 +135,15 @@ class UpdateTemplate extends Component {
             default:
                 break;
         }
+        elementsValid = (this.state.elements.length >= 5 || this.state.elements.length === 0);
+        fieldValidationErr.elements = elementsValid ? "" : "are not enough. A template must has at least 5 elements."
         this.setState({
             formErrors: fieldValidationErr,
             titleValid: titleValid,
             ownerValid: ownerValid,
             descValid: descValid,
             durationValid: durationValid,
+            elementsValid: elementsValid
         }, this.validateForm)
     }
 
@@ -147,7 +154,8 @@ class UpdateTemplate extends Component {
                 this.state.titleValid &&
                 this.state.ownerValid &&
                 this.state.durationValid &&
-                this.state.descValid
+                this.state.descValid &&
+                this.state.elementsValid
         });
     }
 
@@ -170,7 +178,8 @@ class UpdateTemplate extends Component {
             let elementId = this.props.match.params.id + '/elements/' + id;
             await elementAPICalls.removeElements(elementId);
             const elements = this.state.elements.filter(element => element._id !== id)
-            this.setState({ elements: elements })
+            this.setState({ elements: elements },
+                () => { this.validateField(elements, id) })
         }
     }
 
@@ -182,7 +191,7 @@ class UpdateTemplate extends Component {
     render() {
         const { title, owner, description, duration, showUpdate, showPopup, updateId } = this.state;
         return (
-            <div className="container">
+            <div className="container bg-light">
                 <h1 className="text-center mt-4 mb-4">EDIT TEMPLATE</h1>
 
                 <div className="row justify-content-md-center">

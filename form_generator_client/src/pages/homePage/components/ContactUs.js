@@ -7,7 +7,7 @@ const ContactUs = () => (
         <hr></hr>
             <form>
                 <input type="email" placeholder="Email"/>
-                    <button className="btn">Subscribe now</button>
+                    <button className="btn">Send</button>
             </form>
     </section>
 )
