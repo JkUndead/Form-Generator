@@ -18,7 +18,7 @@ const TemplateForm = ({ title, owner, description, duration, handleChange, error
 
             </div>
             <div className={`form-group row ${errorClass(formErrors.owner)}`}>
-                <label className="col-sm-4 col-md-2 col-form-label" htmlFor="owner">Owner:</label>
+                <label className="col-sm-4 col-md-2 col-form-label" htmlFor="owner">Users:</label>
                 <div className="col-sm-4 col-md-5 ">
                     <div className="form-check-inline">
                         <input

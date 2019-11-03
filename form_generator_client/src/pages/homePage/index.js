@@ -11,7 +11,7 @@ const Homepage = () => {
         <div className="Homepage">
             <img src = {Background_Img} alt="background-img" className="Background" />
             <div className="bg-text">
-                <h1><b>Welcome to Form Gererator</b></h1>
+                <h1><b>Welcome to Form Generator</b></h1>
                 
                 <ul id="role_links" style={{"padding": "0"}}>
                     <li>

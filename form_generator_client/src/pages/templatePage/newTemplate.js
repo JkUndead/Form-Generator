@@ -205,7 +205,7 @@ class NewTemplate extends Component {
                                                 ), this.validateForm)
                                             }}
                                             required />
-                                        <label className="form-check-label" htmlFor="declaration">I confirm the above information is... </label>
+                                        <label className="form-check-label" htmlFor="declaration">I confirm the above information is accurate and followed terms and conditions </label>
                                     </div>
                                 </div>
                             </div>
