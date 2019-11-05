@@ -2,8 +2,11 @@ const mongoose = require('mongoose');
 
 const formSchema = new mongoose.Schema({
   template: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'Template'
+    id: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Template'
+    },
+    title: String
   },
   author: {
     id: {
@@ -15,7 +18,10 @@ const formSchema = new mongoose.Schema({
   status: {
     type: String
   },
-  elementValues: {}
+  elementValues: {},
+  submission_date: {
+    type: Date
+  }
 
 })
 

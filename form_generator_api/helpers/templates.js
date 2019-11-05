@@ -14,6 +14,9 @@ exports.getTemplates = function (req, res) {
 exports.createTemplates = function(req,res){
 	db.Template.create(req.body)
 	.then((newTemplate)=>{
+		const date = new Date();
+		newTemplate.submission_date = date;
+		newTemplate.save();
 		res.status(201).json(newTemplate);
 	}).catch((err)=>{
 		res.send(err);

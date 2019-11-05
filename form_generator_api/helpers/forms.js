@@ -23,14 +23,16 @@ exports.createForm = function (req, res) {
 	});
 	user.save();
 	const form = new Form({
-		template: ObjectID(req.body.templateId),
-		status: "pending",
+		status: "Pending",
 		elementValues: req.body.elementValues,
+		submission_date: new Date()
 	});
 	db.Form.create(form)
 		.then((newForm) => {
 			newForm.author.id = ObjectID(user._id);
 			newForm.author.username = req.body.userName;
+			newForm.template.id = ObjectID(req.body.templateId);
+			newForm.template.title = req.body.title;
 			newForm.save();
 			res.status(201).json(newForm);
 		})
@@ -39,8 +41,7 @@ exports.createForm = function (req, res) {
 				from: "murdochformflow@gmail.com",
 				to: req.body.email,
 				subject: "Form Submission Confirmation",
-				text: `You have submitted a form for Approval. 
-				Please be patient! Your form is being proceeded`
+				text: `You have submitted a form for Approval. Your form is being proceeded. You can find all your submitted forms here http://localhost:3000/forms/${req.body.userName}`
 			};
 
 			transporter.sendMail(mailOptions, function (error, info) {

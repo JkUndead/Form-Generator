@@ -29,12 +29,6 @@ const templateSchema = new mongoose.Schema({
 			ref: 'Element'	
 		}
 	],
-	author: {
-		id:{
-			type: mongoose.Schema.Types.ObjectId,
-			ref: 'User'
-		},
-	},
 	managers: [
 		{
 			id:{
@@ -44,6 +38,9 @@ const templateSchema = new mongoose.Schema({
 			managerName: String
 		}
 	],
+	submission_date: {
+		type: Date
+	}
 });
 
 //cascading delete

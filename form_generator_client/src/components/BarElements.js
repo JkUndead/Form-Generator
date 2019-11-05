@@ -3,13 +3,10 @@ import {Link} from 'react-router-dom';
 
 const BarElements = ({item,path,header}) => {
    
-
-    
-
     return(
         <div className="list-group list-group-flush">
             <Link to={{
-                path: path,
+                pathname: path,
                 state: {
                         header: header
                     }

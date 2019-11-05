@@ -15,7 +15,7 @@ class UpdateTemplate extends Component {
             owner: "",
             description: "",
             duration: "",
-            confirmation_status: true,
+            confirmation_status: false,
             elements: [],
             titleValid: true,
             ownerValid: true,

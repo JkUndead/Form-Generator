@@ -33,7 +33,7 @@ const TemplateForm = ({ title, owner, description, duration, handleChange, error
                     </div>
                     <label className="form-check-label" name="owner" htmlFor="student">
                         Student
-                                        </label>
+                    </label>
                 </div>
                 <div className="col-sm-4 col-md-5">
                     <div className="form-check-inline">

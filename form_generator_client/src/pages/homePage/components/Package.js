@@ -19,9 +19,9 @@ const Package = () => (
             </li>
             <li>
                 <i className="far fa-paper-plane fa-4x"></i>
-                <h4>Approval Notification</h4>
+                <h4>Confirmation Notification</h4>
                 <p>The form after user submission is set to pending. 
-                 <br></br>A notification email is then sent to a manager.
+                 <br></br>A notification email is then sent to the sender.
                 </p>
             </li>
             <li>

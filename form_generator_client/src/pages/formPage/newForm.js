@@ -19,6 +19,7 @@ class NewForm extends Component {
             elements: [],
             elementValues: {},
             validValues: false,
+            formValid: false,
             formErrors: {
                 message: ""
             }
@@ -52,7 +53,7 @@ class NewForm extends Component {
         }
     }
 
-    handleSubmit(event) {
+    handleSubmit() {
         this.addForm(this.state)
     }
 
@@ -159,7 +160,8 @@ class NewForm extends Component {
                                     <Link to={{
                                         pathname: "/forms/sent",
                                         state: {
-                                            header: this.props.location.state.header
+                                            header: this.props.location.state.header,
+                                            userName: this.state.userName
                                         }
 
                                     }} >
