@@ -7,8 +7,8 @@ const Forms = (props) => {
         <div className="d-flex">
             <SideBar
                 header={header}
-                listItems={["Forms", "Draft", "Sent"]}
-                paths={["/forms","/forms/draft","/forms/sent"]}
+                listItems={["Forms", "Sent"]}
+                paths={["/forms","/forms/sent"]}
             />
             <FormList header={header}/>
         </div>

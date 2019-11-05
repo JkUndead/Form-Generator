@@ -157,14 +157,14 @@ class NewForm extends Component {
                                     </button>
                                     </Link>
                                     <Link to={{
-                                        pathname: "/forms",
+                                        pathname: "/forms/sent",
                                         state: {
                                             header: this.props.location.state.header
                                         }
 
                                     }} >
                                         <button
-                                            className="btn btn-outline-primary float-right"
+                                            className="btn btn-primary float-right"
                                             onClick={this.handleSubmit}
                                         >Submit
                                     </button>

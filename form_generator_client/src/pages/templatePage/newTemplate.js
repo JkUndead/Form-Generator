@@ -231,7 +231,7 @@ class NewTemplate extends Component {
                                     <Link to="/templates">
                                         <button
                                             disabled={!this.state.formValid}
-                                            className="btn btn-outline-primary float-right"
+                                            className="btn btn-primary float-right"
                                             onClick={this.handleSubmit}
                                         >Submit
                                     </button>

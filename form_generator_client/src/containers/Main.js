@@ -7,6 +7,7 @@ import NewTemplates from "../pages/templatePage/newTemplate";
 import UpdateTemplate from "../pages/templatePage/editTemplate";
 import Forms from "../pages/formPage";
 import NewForms from "../pages/formPage/newForm";
+import SentForm from "../pages/formPage/sentForm"
 import Approval from "../pages/approvalPage";
 import NotFoundPage from "../pages/404";
 
@@ -48,7 +49,14 @@ const Main = () => {
                 path="/forms/new"
                 render={(props) =>  <NewForms {...props} 
                 isAuthed={true}/>}>
-            </Route>    
+            </Route>  
+
+            <Route 
+                exact 
+                path="/forms/sent"
+                render={(props) =>  <SentForm {...props} 
+                isAuthed={true}/>}>
+            </Route>     
                 
 
             <Route exact path="/approvals">

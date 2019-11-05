@@ -15,7 +15,7 @@ class UpdateTemplate extends Component {
             owner: "",
             description: "",
             duration: "",
-            confirmation_status: false,
+            confirmation_status: true,
             elements: [],
             titleValid: true,
             ownerValid: true,
@@ -256,6 +256,7 @@ class UpdateTemplate extends Component {
                                 <div className="col-sm-12 mt-4">
                                     <Link to="/templates">
                                         <button
+                                            //disabled={!this.state.formValid}
                                             className="btn btn-outline-secondary"
                                             type="submit"
                                         >Cancel
@@ -264,7 +265,7 @@ class UpdateTemplate extends Component {
                                     <Link to="/templates">
                                         <button
                                             disabled={!this.state.formValid}
-                                            className="btn btn-outline-primary float-right"
+                                            className="btn btn-primary float-right"
                                             onClick={this.handleSubmit}
                                         >Submit
                                     </button>

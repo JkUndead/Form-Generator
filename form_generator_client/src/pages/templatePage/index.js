@@ -6,8 +6,8 @@ const Templates = () => (
     <div className="d-flex">
         <SideBar 
             header="Admin"
-            listItems = {["Templates","Draft"]}
-            paths={["/templates","/templates/draft"]}
+            listItems = {["Templates"]}
+            paths="/templates"
         />
         <TemplateList />
         

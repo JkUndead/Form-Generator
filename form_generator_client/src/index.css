@@ -202,10 +202,10 @@ hr {
 
 .popup_inner {
   position: absolute;
-  left: 32%;
-  right: 32%;
+  left: 35%;
+  right: 35%;
   top: 20%;
-  bottom: 40%;
+  bottom: 45%;
   margin: auto;
   border-radius: 20px;
   background: #fff;

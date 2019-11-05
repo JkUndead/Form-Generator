@@ -1,6 +1,7 @@
 const db = require('../models');
 const User = require('../models/users');
 const Form = require('../models/forms');
+const transporter = require('./mailSender')
 const ObjectID = require("mongodb").ObjectID;
 
 //For all templates
@@ -32,7 +33,25 @@ exports.createForm = function (req, res) {
 			newForm.author.username = req.body.userName;
 			newForm.save();
 			res.status(201).json(newForm);
-		}).catch((err) => {
+		})
+		.then(() => {
+			let mailOptions = {
+				from: "murdochformflow@gmail.com",
+				to: req.body.email,
+				subject: "Form Submission Confirmation",
+				text: `You have submitted a form for Approval. 
+				Please be patient! Your form is being proceeded`
+			};
+
+			transporter.sendMail(mailOptions, function (error, info) {
+				if (error) {
+					console.log("Email error: " + error);
+				} else {
+					console.log("Email sent: " + info.response);
+				}
+			});
+		})
+		.catch((err) => {
 			res.send(err);
 		})
 }
