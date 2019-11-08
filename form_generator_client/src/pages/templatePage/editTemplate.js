@@ -183,7 +183,7 @@ class UpdateTemplate extends Component {
         }
     }
 
-    handleSubmit(event) {
+    handleSubmit() {
         const { match: { params } } = this.props;
         this.updateTemplate(this.state, params.id);
     }
@@ -192,7 +192,7 @@ class UpdateTemplate extends Component {
         const { title, owner, description, duration, showUpdate, showPopup, updateId } = this.state;
         return (
             <div className="container bg-light">
-                <h1 className="text-center mt-4 mb-4">EDIT TEMPLATE</h1>
+                <h1 className="text-center mt-4 mb-4 p-3">EDIT TEMPLATE</h1>
 
                 <div className="row justify-content-md-center">
                     <div className="col-8">

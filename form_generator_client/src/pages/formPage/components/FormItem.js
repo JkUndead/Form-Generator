@@ -8,7 +8,7 @@ const FormItem = ({ _id, title, duration, header }) => {
                 <div className="card-header">{title}</div>
                 <div className="card-body">
                     
-                    <h6 className="card-subtitle mb-2 text-muted">{duration}</h6>
+                    <h6 className="card-subtitle mb-2 text-muted">Duration: {duration}</h6>
                     <p className="card-text">This forms is blah blah blah...</p>
                     <span className="card-link">
                         <Link to={{

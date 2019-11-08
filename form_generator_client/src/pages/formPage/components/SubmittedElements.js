@@ -1,26 +1,26 @@
 import React from 'react';
 
-const FormElements = ({name, type, handleChange, elementValues}) => {
-
+const SubmittedElements = (props) => {
+    const label = (Object.keys(props))[0];
+    const value = Object.keys(props).map(key =>((props[key])))
     return (
         <div className=" form-group row mt-4">
             <label className="col-sm-4 col-md-3 col-form-label">
-                {name}:
+                {label}:
             </label>
             <div className="col-sm-8 col-md-9">
                 <input 
                     className="form-control" 
-                    onChange={handleChange} 
-                    name={name}
-                    value={elementValues.name}
-                    type={`${type}`} 
-                    required
+                    name={label}
+                    placeholder={value}
+                    type='text'
+                    readOnly
                 />
             </div>
         </div>
     )
+
+
 }
 
-
-
-export default FormElements;
+export default SubmittedElements;

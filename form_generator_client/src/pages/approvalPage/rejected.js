@@ -8,8 +8,7 @@ const Approval = () => (
             listItems={["Pending", "Approved", "Rejected"]}
             paths={["/pending","/approved","/rejected"]}
         />
-        
-        <ApprovalList header="Manager" status="Pending" />
+        <ApprovalList header="Manager" status="Rejected"/>
     </div>
 );
 

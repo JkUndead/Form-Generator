@@ -12,7 +12,7 @@ const SentItem = ({ _id, status, template, submission_date, header }) => {
                     <p className="card-text"><i>Submitted on: <br></br></i>{submission_date}</p>
                     <span className="card-link">
                         <Link to={{
-                            pathname: `/forms/${_id}`,
+                            pathname: `/forms/sent/${_id}`,
                             state: {
                                 id: _id,
                                 header: header

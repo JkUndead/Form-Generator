@@ -7,26 +7,34 @@ class SentList extends Component {
         super(props);
         this.state = {
             sentForms: [],
-            hasSent: false
+            hasSent: false,
+            message: "Loading.."
         }
     }
 
     componentDidMount() {
         this.loadForms();
+        
     }
 
     async loadForms() {
         let forms = await apiCalls.getForms();
         let sentForms = forms.filter(form => {
-            while (form.author === undefined) { }
+            while (form.author === undefined) {continue;}
             return (form.author.username.toLowerCase() === this.props.username.toLowerCase())
         })
         this.setState({ sentForms })
         let hasSent = this.state.hasSent;
-        if (sentForms.length > 0)
+        if (this.state.sentForms.length > 0){
             this.setState({ hasSent: !hasSent })
-
+        } else {
+            let message = this.state.message;
+            message = "You have no submitted form";
+            this.setState({message: message});
+        }
+        
     }
+
 
     render() {
         const forms = this.state.sentForms.map((f) => (
@@ -50,8 +58,7 @@ class SentList extends Component {
                         </div>
                         :
                         <div className="ml-3">
-                            <h2><i>You have no submitted form</i></h2>
-                            <h2><i>Please <b>go back</b> to form store and <b>submit</b> one!</i></h2>
+                            <h2><i>{this.state.message}</i></h2>
                         </div>
                     }
                 </div>

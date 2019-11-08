@@ -125,7 +125,7 @@ class LoginForm extends Component {
                                     disabled={!this.state.formValid}
                                     className="btn btn-primary text-center"
                                     
-                                >Login
+                                >Search
                                     </button>
                             </Link>
                         </form>

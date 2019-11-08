@@ -21,7 +21,7 @@ exports.createUser = function(req,res){
 }
 //get specific user detail
 exports.getUser = function(req,res){
-    db.User.findById(req.params.userId).exec()
+    db.User.findById(req.params.userId)
     .then((foundUser)=>{
         res.json(foundUser);
     }).catch(err=>{

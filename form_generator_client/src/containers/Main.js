@@ -7,8 +7,13 @@ import NewTemplates from "../pages/templatePage/newTemplate";
 import UpdateTemplate from "../pages/templatePage/editTemplate";
 import Forms from "../pages/formPage";
 import NewForms from "../pages/formPage/newForm";
-import SentPage from "../pages/formPage/sent"
-import Approval from "../pages/approvalPage";
+import ShowForm from "../pages/formPage/showSent";
+import SentPage from "../pages/formPage/sent";
+import Pending from "../pages/approvalPage";
+import PendingForm from "../pages/approvalPage/pendingForm"
+import Approved from "../pages/approvalPage/approved"
+import Rejected from "../pages/approvalPage/rejected"
+import ApprovedForm from "../pages/approvalPage/approvedForm"
 import NotFoundPage from "../pages/404";
 
 const Main = () => {
@@ -51,22 +56,63 @@ const Main = () => {
                 isAuthed={true}/>}>
             </Route>  
             
-
             <Route 
                 exact 
                 path="/forms/sent"
                 render={(props) =>  <SentPage {...props} 
                 isAuthed={true}/>}>
-            </Route>     
+            </Route> 
+
+            <Route 
+                exact 
+                path="/forms/sent/:id" 
+                render={(props) =>  <ShowForm {...props} 
+                isAuthed={true}/>}
+            />    
 
             <Route exact path="/forms/:user">
                 <Redirect to="/login"/> 
             </Route>  
                 
 
-            <Route exact path="/approvals">
-                <Approval />
+            <Route exact path="/pending">
+                <Pending />
             </Route>
+
+            <Route 
+                exact 
+                path="/pending/:id" 
+                render={(props) =>  <PendingForm {...props} 
+                isAuthed={true}/>}
+            /> 
+
+            <Route 
+                exact 
+                path="/approved" 
+                render={(props) =>  <Approved {...props} 
+                isAuthed={true}/>}
+            /> 
+
+            <Route 
+                exact 
+                path="/approved/:id" 
+                render={(props) =>  <ApprovedForm {...props} 
+                isAuthed={true}/>}
+            /> 
+
+            <Route 
+                exact 
+                path="/rejected" 
+                render={(props) =>  <Rejected {...props} 
+                isAuthed={true}/>}
+            /> 
+
+            <Route  
+                exact 
+                path="/rejected/:id" 
+                render={(props) =>  <ApprovedForm {...props} 
+                isAuthed={true}/>}
+            /> 
 
             <Route exact path="/404">
                 <NotFoundPage />

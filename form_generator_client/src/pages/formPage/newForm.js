@@ -53,12 +53,21 @@ class NewForm extends Component {
         }
     }
 
-    handleSubmit() {
-        this.addForm(this.state)
+    async handleSubmit() {
+        await this.addForm(this.state);
+        await this.wait3Sec();
     }
 
     async addForm(value) {
-        await FormAPICalls.createForm(value)
+        await FormAPICalls.createForm(value);
+    }
+
+    wait3Sec() { 
+        return new Promise(resolve => {
+          setTimeout(() => {
+            resolve();
+          }, 3000);
+        });
     }
 
     render() {
@@ -73,7 +82,7 @@ class NewForm extends Component {
         ))
         return (
             <div className="container bg-light">
-                <h1 className="text-center mb-4 mt-4">{title}</h1>
+                <h1 className="text-center mb-4 mt-4 p-3">{title}</h1>
                 <div className="row justify-content-md-center">
                     <div className="col-8">
                         <div className="row justify-content-md-center">

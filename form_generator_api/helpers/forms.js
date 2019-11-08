@@ -22,18 +22,23 @@ exports.createForm = function (req, res) {
 		role: req.body.role,
 	});
 	user.save();
+	const  newAuthor = {
+		id: ObjectID(user._id), 
+		username: req.body.userName 
+	}
+	const newTemplate = {
+		id: ObjectID(req.body.templateId),
+		title: req.body.title
+	}
 	const form = new Form({
 		status: "Pending",
 		elementValues: req.body.elementValues,
-		submission_date: new Date()
+		submission_date: new Date(),
+		author: newAuthor,
+		template: newTemplate
 	});
 	db.Form.create(form)
 		.then((newForm) => {
-			newForm.author.id = ObjectID(user._id);
-			newForm.author.username = req.body.userName;
-			newForm.template.id = ObjectID(req.body.templateId);
-			newForm.template.title = req.body.title;
-			newForm.save();
 			res.status(201).json(newForm);
 		})
 		.then(() => {
@@ -41,7 +46,7 @@ exports.createForm = function (req, res) {
 				from: "murdochformflow@gmail.com",
 				to: req.body.email,
 				subject: "Form Submission Confirmation",
-				text: `You have submitted a form for Approval. Your form is being proceeded. You can find all your submitted forms here http://localhost:3000/forms/${req.body.userName}`
+				html: '<h1>You have submitted a form for approval.</h1><p> The current status is set to <b style="color:green;">PENDING</b></p>'
 			};
 
 			transporter.sendMail(mailOptions, function (error, info) {
@@ -70,6 +75,21 @@ exports.getForm = function (req, res) {
 exports.updateForm = function (req, res) {
 	db.Form.findOneAndUpdate({ _id: req.params.formId }, req.body)
 		.then(foundForm => {
+			let mailOptions = {
+				from: "murdochformflow@gmail.com",
+				to: req.body.email,
+				subject: `Submitted Form Result`,
+				html: `<h2>Your Form: </h2><h1>${foundForm.template.title}</h1><br></br>
+				<p>Your submitted form has been <b>${req.body.status}</b></p>`
+			};
+
+			transporter.sendMail(mailOptions, function (error, info) {
+				if (error) {
+					console.log("Email error: " + error);
+				} else {
+					console.log("Email sent: " + info.response);
+				}
+			});
 			res.json(foundForm);
 		}).catch(err => {
 			res.send(err);

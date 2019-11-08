@@ -1,4 +1,4 @@
-const APIURL = '/api/forms'
+const APIURL = '/api/forms/'
 
 /* For all forms */
 export async function getForms() {
@@ -56,4 +56,73 @@ export async function createForm(formObj) {
         return res.json()
     })
 
+}
+
+export async function getOneForm(id){
+    const getOneURL = APIURL + id;
+    return fetch(getOneURL)
+    .then(res => {
+        if (!res.ok) {
+            if (res.status >= 400 && res.status < 500) {
+                return res.json().then(data => {
+                    let err = { errorMessage: data.message };
+                    throw err;
+                })
+            } else {
+                let err = { errorMessage: 'Server is not responding' };
+                throw err;
+            }
+        }
+        return res.json();
+    })
+}
+
+export async function updateForm(status,email,id){
+    const updateURL = '/api/forms/' + id;
+        return fetch(updateURL, {
+            method: 'put',
+            headers: new Headers({
+                'Content-Type': 'application/json',
+            }),
+            body: JSON.stringify({
+                status: status,
+                email: email
+            })
+        })
+        .then(res => {
+            if (!res.ok) {
+                if (res.status >= 400 && res.status < 500) {
+                    return res.json().then(data => {
+                        let err = { errorMessage: data.message };
+                        throw err;
+                    })
+                } else {
+                    let err = { errorMessage: 'Server is not responding' };
+                    throw err;
+                }
+            }
+            return res.json();
+        })
+}
+
+
+export async function removeForm(id){
+	const deleteURL = APIURL + id;
+	return fetch(deleteURL, {
+		method: 'delete'
+	})
+	.then(res =>{
+		if(!res.ok) {
+			if(res.status >= 400 && res.status < 500) {
+				return res.json().then(data =>{
+					let err = {errorMessage: data.message};
+					throw err;
+				})
+			} else {
+				let err = {errorMessage: 'Server is not responding'};
+				throw err;
+			}
+		}
+		return res.json();
+	})
 }

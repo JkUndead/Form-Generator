@@ -21,7 +21,13 @@ section {
   align-items: center;
   padding: 100px 80px;
 }
+.container {
+  width: 60%
+}
 
+.jumbotron .container {
+  width: 100%;
+}
 .grid {
   width: 100%;
   display: flex;

@@ -40,7 +40,7 @@ const Homepage = () => {
                         </Link>
                     </li>
                     <li>
-                        <Link to='/approvals'>
+                        <Link to='/pending'>
                             <button className="btn btn-warning btn-lg">Manager</button>
                         </Link>
                     </li>
