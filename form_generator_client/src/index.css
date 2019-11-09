@@ -1,7 +1,7 @@
 html,
 body,
-#app,
-#app>div {
+.App,
+.App>div {
   height: 100%
 }
 
@@ -10,6 +10,11 @@ body,
   padding: 0;
   box-sizing: border-box;
 }
+
+.App {
+  background: #8a8a8a;
+}
+
 
 ul {
   list-style: none;
@@ -22,7 +27,8 @@ section {
   padding: 100px 80px;
 }
 .container {
-  width: 60%
+  width: 60%;
+  border-radius: 2%;
 }
 
 .jumbotron .container {
@@ -41,7 +47,15 @@ section {
   }
 }
 
+ol span {
+  margin-left: 20px ;
+  opacity: 0.5;
+}
 
+ol span:hover {
+  opacity: 1;
+  color: red
+}
 
 
 

@@ -8,6 +8,7 @@ const formSchema = new mongoose.Schema({
     },
     title: String
   },
+
   author: {
     id: {
       type: mongoose.Schema.Types.ObjectId,
@@ -15,10 +16,16 @@ const formSchema = new mongoose.Schema({
     },
     username: String
   },
+
   status: {
     type: String
   },
+  cuurentProgress: {
+    type: String
+  },
+
   elementValues: {},
+  
   submission_date: {
     type: Date
   }

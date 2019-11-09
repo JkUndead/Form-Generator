@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import * as apiCalls from '../../services/templates_api';
+import * as userAPI from '../../services/users_api'
 import FormErrors from '../../components/FormErrors';
 import ElementList from './components/ElementList';
 import PopUp from '../../components/PopUp';
@@ -16,12 +17,16 @@ class NewTemplate extends Component {
             duration: "",
             confirmation_status: false,
             elements: [],
+            availableManagers: [],
+            assignedManager: [],
+            managerName: "",
             titleValid: false,
             ownerValid: false,
             descValid: false,
             durationValid: false,
             formValid: false,
             elementsValid: false,
+            managerValid: false,
             formErrors: {
                 title: "",
                 owner: "",
@@ -36,6 +41,18 @@ class NewTemplate extends Component {
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
         this.addNewElements = this.addNewElements.bind(this);
+    }
+
+    componentDidMount() {
+        this.loadManager();
+    }
+
+    async loadManager() {
+        const users = await userAPI.getUsers();
+        const availableManagers = users.filter(user => (
+            user.role === "Manager"
+        ))
+        this.setState({availableManagers: availableManagers})
     }
 
     handleChange(event) {
@@ -83,6 +100,12 @@ class NewTemplate extends Component {
             () => { this.validateField(elements, id) });
     }
 
+    removeManager(id) {
+        let assignedManager = this.state.assignedManager;
+        assignedManager.splice(id, 1);
+        this.setState({assignedManager: assignedManager})
+    }
+
     validateField(field, value) {
         let fieldValidationErr = this.state.formErrors;
         let titleValid = this.state.titleValid;
@@ -90,6 +113,7 @@ class NewTemplate extends Component {
         let descValid = this.state.descValid;
         let durationValid = this.state.durationValid;
         let elementsValid = this.state.elementsValid;
+        let managerValid = this.state.managerValid;
         switch (field) {
             case "title":
                 titleValid = value.length >= 5;
@@ -107,6 +131,9 @@ class NewTemplate extends Component {
                 durationValid = value.length > 0;
                 fieldValidationErr.duration = durationValid ? "" : "cannot be blank";
                 break;
+            case "managerName":
+                managerValid = value.length > 0;
+                break;
             default:
                 break;
         }
@@ -118,7 +145,8 @@ class NewTemplate extends Component {
             ownerValid: ownerValid,
             descValid: descValid,
             durationValid: durationValid,
-            elementsValid: elementsValid
+            elementsValid: elementsValid,
+            managerValid: managerValid
         }, this.validateForm)
     }
 
@@ -144,6 +172,25 @@ class NewTemplate extends Component {
         ));
     }
 
+    addManager(event) {
+        const managers = this.state.availableManagers.filter(m => m.username === this.state.managerName)
+        const assigned = {
+            _id: managers[0]._id,
+            managerName: managers[0].username
+        }
+        let assignedManager = this.state.assignedManager;
+        let isExisted = false;
+        assignedManager.forEach(manager => {
+            if(manager._id === assigned._id) {
+                isExisted = !isExisted;
+            }
+        })
+        if(!isExisted) {
+            assignedManager.push(assigned);
+            this.setState({assignedManager: assignedManager})
+        }
+        event.preventDefault();
+    }
 
 
     handleSubmit() {
@@ -155,7 +202,7 @@ class NewTemplate extends Component {
     }
 
     render() {
-        const { title, owner, description, duration, elements, showUpdate, showPopup, updateId } = this.state;
+        const { title, owner, description, duration, elements, showUpdate, showPopup, updateId, availableManagers, assignedManager} = this.state;
         return (
             <div className="container bg-light">
                 <h1 className="text-center mt-4 mb-4">NEW TEMPLATE</h1>
@@ -170,9 +217,14 @@ class NewTemplate extends Component {
                             owner={owner}
                             description={description}
                             duration={duration}
+                            availableManagers = {availableManagers}
+                            assignedManager = {assignedManager}
                             handleChange={this.handleChange.bind(this)}
                             formErrors={this.state.formErrors}
                             errorClass={this.errorClass.bind(this)}
+                            addManager = {this.addManager.bind(this)}
+                            managerValid = {this.state.managerValid}
+                            removeManager = {this.removeManager.bind(this)}
                         />
 
                         <div className="row">

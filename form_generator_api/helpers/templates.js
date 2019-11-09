@@ -12,6 +12,10 @@ exports.getTemplates = function (req, res) {
 }
 
 exports.createTemplates = function(req,res){
+	// const template = new Tempalte({
+	// 	title: title,
+
+	// })
 	db.Template.create(req.body)
 	.then((newTemplate)=>{
 		const date = new Date();

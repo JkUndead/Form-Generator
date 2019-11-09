@@ -35,7 +35,8 @@ export async function createTemplate(templateObj){
         description = templateObj.description,
         duration = templateObj.duration,
         confirmation_status = templateObj.confirmation_status,
-        elements = templateObj.elements;
+        elements = templateObj.elements,
+        managers = templateObj.assignedManager;
 	return fetch(APIURL, {
 		method: 'post',
 		headers: new Headers({
@@ -47,7 +48,7 @@ export async function createTemplate(templateObj){
             description: description, 
             duration: duration, 
             confirmation_status: confirmation_status,
-            //elements: elements
+            managers: managers
         })
     })
 	.then(res =>{
@@ -68,6 +69,10 @@ export async function createTemplate(templateObj){
             elements.forEach((element) =>{
                 addElement(element,eURL); 
             })
+            // managers.forEach((manager) => {
+            //     newTemplate.managers.push(manager);
+            // })
+            // newTemplate.save();
             
         });
     })
