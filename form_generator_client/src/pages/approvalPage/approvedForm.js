@@ -14,7 +14,7 @@ class ApprovedForm extends Component {
             elementValues: [],
             formValid: true,
         }
-        this.handleSubmit = this.handleSubmit.bind(this);
+        
     }
 
     componentDidMount() {

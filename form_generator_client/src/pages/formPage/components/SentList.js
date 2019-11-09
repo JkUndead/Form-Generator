@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import * as apiCalls from '../../../services/forms_api';
+import * as userAPI from '../../../services/users_api'
 import SentItem from './SentItem';
 
 class SentList extends Component {
@@ -18,11 +19,20 @@ class SentList extends Component {
     }
 
     async loadForms() {
-        let forms = await apiCalls.getForms();
-        let sentForms = forms.filter(form => {
+        const forms = await apiCalls.getForms();
+        const sentForms = forms.filter((form) => {
             while (form.author === undefined) {continue;}
-            return (form.author.username.toLowerCase() === this.props.username.toLowerCase())
+            return (
+                form.author.username.toLowerCase() === this.props.username.toLowerCase() 
+            )
         })
+        // const sentForms = temp.filter(async function(form) {
+        //     const userId = form.author.id;
+        //     const user = await userAPI.getOneUser(userId);
+        //     const role = user.role;
+        //     console.log(this);
+        //     //return (role.toLowerCase() === this.props.role.toLowerCase() )
+        // })
         this.setState({ sentForms })
         let hasSent = this.state.hasSent;
         if (this.state.sentForms.length > 0){

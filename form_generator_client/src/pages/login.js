@@ -6,9 +6,8 @@ class LoginForm extends Component {
         super(props);
         this.state = {
             username: "",
-            role: "",
+            role: this.props.location.state.header,
             userValid: false,
-            roleValid: false,
             formValid: false
         };
         this.handleChange = this.handleChange.bind(this);
@@ -24,28 +23,22 @@ class LoginForm extends Component {
 
     validateField(field, value) {
         let userValid = this.state.userValid;
-        let roleValid = this.state.roleValid;
         switch (field) {
             case "username":
                 userValid = value.length >= 2;
-                break;
-            case "role":
-                roleValid = value.length > 0;
                 break;
             default:
                 break;
         }
         this.setState({
             userValid: userValid,
-            roleValid: roleValid
         }, this.validateForm)
     }
 
     validateForm() {
         this.setState({
             formValid: 
-                this.state.userValid &&
-                this.state.roleValid
+                this.state.userValid 
         })
     }
 
@@ -76,41 +69,8 @@ class LoginForm extends Component {
                                         required autoFocus />
                                 </div>
                             </div>
-                            <div className="form-group row">
-                                <label className="col-sm-4 col-md-4 col-form-label" htmlFor="role">Your role:</label>
-                                <div className="col-sm-4 col-md-4 ">
-                                    <div className="form-check-inline">
-                                        <input
-                                            className="form-check-input"
-                                            type="radio"
-                                            id="student"
-                                            name="role"
-                                            checked={this.state.role === "Student"}
-                                            value="Student"
-                                            onChange={this.handleChange.bind(this)}
-                                            required />
-                                    </div>
-                                    <label className="form-check-label" name="role" htmlFor="student">
-                                        Student
-                                </label>
-                                </div>
-                                <div className="col-sm-4 col-md-4">
-                                    <div className="form-check-inline">
-                                        <input
-                                            className="form-check-input"
-                                            type="radio"
-                                            id="staff"
-                                            name="role"
-                                            checked={this.state.role === "Staff"}
-                                            value="Staff"
-                                            onChange={this.handleChange.bind(this)}
-                                            required />
-                                    </div>
-                                    <label className="form-check-label" name="role" htmlFor="staff">
-                                        Staff
-                                    </label>
-                                </div>
-                            </div>
+                            
+
 
                             <br />
                             <Link to={{
@@ -124,7 +84,7 @@ class LoginForm extends Component {
                                 <button
                                     disabled={!this.state.formValid}
                                     className="btn btn-primary text-center"
-                                    
+                                    //onClick={this.handleSubmit}
                                 >Search
                                     </button>
                             </Link>

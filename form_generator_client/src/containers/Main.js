@@ -25,9 +25,12 @@ const Main = () => {
                 <Homepage />
             </Route>
 
-            <Route exact path="/login" >
-                <Login />
-            </Route>
+            <Route 
+                exact 
+                path="/login" 
+                render={(props) => <Login {...props} 
+                isAuthed={true}/>}
+            />
 
             <Route exact path="/templates">
                 <Templates />

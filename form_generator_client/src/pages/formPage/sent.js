@@ -3,16 +3,16 @@ import SideBar from '../../components/SideBar';
 import SentList from './components/SentList'
 
 const Sent = (props) => {
-    const header = props.location.state.header;
+    const role = props.location.state.header;
     const username = props.location.state.userName;
     return (
         <div className="d-flex">
             <SideBar
-                header={header}
-                listItems={["Forms", "Sent"]}
+                header={role}
+                listItems={["Forms", "Check"]}
                 paths={["/forms","/forms/sent"]}
             />
-            <SentList username={username}/>
+            <SentList username={username} role={role}/>
         </div>
     )
 }
