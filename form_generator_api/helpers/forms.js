@@ -22,9 +22,9 @@ exports.createForm = function (req, res) {
 		role: req.body.role,
 	});
 	user.save();
-	const  newAuthor = {
-		id: ObjectID(user._id), 
-		username: req.body.userName 
+	const newAuthor = {
+		id: ObjectID(user._id),
+		username: req.body.userName
 	}
 	const newTemplate = {
 		id: ObjectID(req.body.templateId),
@@ -35,7 +35,9 @@ exports.createForm = function (req, res) {
 		elementValues: req.body.elementValues,
 		submission_date: new Date(),
 		author: newAuthor,
-		template: newTemplate
+		template: newTemplate,
+		managerList: req.body.managerList,
+		currentProgress: "0"
 	});
 	db.Form.create(form)
 		.then((newForm) => {
@@ -75,21 +77,24 @@ exports.getForm = function (req, res) {
 exports.updateForm = function (req, res) {
 	db.Form.findOneAndUpdate({ _id: req.params.formId }, req.body)
 		.then(foundForm => {
-			let mailOptions = {
-				from: "murdochformflow@gmail.com",
-				to: req.body.email,
-				subject: `Submitted Form Result`,
-				html: `<h2>Your Form: </h2><h1>${foundForm.template.title}</h1><br></br>
-				<p>Your submitted form has been <b>${req.body.status}</b></p>`
-			};
+			if (foundForm.currentProgress === '-1') {
+				let mailOptions = {
+					from: "murdochformflow@gmail.com",
+					to: req.body.email,
+					subject: `Submitted Form Result`,
+					html: `<h2>Your Form: </h2><h1>${foundForm.template.title}</h1><br></br>
+					<p>Your submitted form has been <b>${req.body.status}</b></p>`
+				};
 
-			transporter.sendMail(mailOptions, function (error, info) {
-				if (error) {
-					console.log("Email error: " + error);
-				} else {
-					console.log("Email sent: " + info.response);
-				}
-			});
+				transporter.sendMail(mailOptions, function (error, info) {
+					if (error) {
+						console.log("Email error: " + error);
+					} else {
+						console.log("Email sent: " + info.response);
+					}
+				});
+			}
+
 			res.json(foundForm);
 		}).catch(err => {
 			res.send(err);

@@ -26,6 +26,7 @@ export async function createForm(formObj) {
         elementValues = formObj.elementValues,
         userName = formObj.userName,
         email = formObj.email,
+        managerList = formObj.managerList,
         role = formObj.role;
     return fetch(APIURL, {
         method: 'post',
@@ -38,8 +39,8 @@ export async function createForm(formObj) {
             elementValues: elementValues,
             userName: userName,
             email: email,
-            role: role
-            
+            role: role,
+            managerList: managerList
         })
     }).then(res => {
         if (!res.ok) {
@@ -58,37 +59,41 @@ export async function createForm(formObj) {
 
 }
 
-export async function getOneForm(id){
+export async function getOneForm(id) {
     const getOneURL = APIURL + id;
     return fetch(getOneURL)
-    .then(res => {
-        if (!res.ok) {
-            if (res.status >= 400 && res.status < 500) {
-                return res.json().then(data => {
-                    let err = { errorMessage: data.message };
+        .then(res => {
+            if (!res.ok) {
+                if (res.status >= 400 && res.status < 500) {
+                    return res.json().then(data => {
+                        let err = { errorMessage: data.message };
+                        throw err;
+                    })
+                } else {
+                    let err = { errorMessage: 'Server is not responding' };
                     throw err;
-                })
-            } else {
-                let err = { errorMessage: 'Server is not responding' };
-                throw err;
+                }
             }
-        }
-        return res.json();
-    })
+            return res.json();
+        })
 }
 
-export async function updateForm(status,email,id){
+export async function updateForm(formObj, id) {
     const updateURL = '/api/forms/' + id;
-        return fetch(updateURL, {
-            method: 'put',
-            headers: new Headers({
-                'Content-Type': 'application/json',
-            }),
-            body: JSON.stringify({
-                status: status,
-                email: email
-            })
+    const status = formObj.status,
+        email = formObj.email,
+        currentProgress = formObj.currentProgress;
+    return fetch(updateURL, {
+        method: 'put',
+        headers: new Headers({
+            'Content-Type': 'application/json',
+        }),
+        body: JSON.stringify({
+            status: status,
+            email: email,
+            currentProgress: currentProgress
         })
+    })
         .then(res => {
             if (!res.ok) {
                 if (res.status >= 400 && res.status < 500) {
@@ -106,23 +111,23 @@ export async function updateForm(status,email,id){
 }
 
 
-export async function removeForm(id){
-	const deleteURL = APIURL + id;
-	return fetch(deleteURL, {
-		method: 'delete'
-	})
-	.then(res =>{
-		if(!res.ok) {
-			if(res.status >= 400 && res.status < 500) {
-				return res.json().then(data =>{
-					let err = {errorMessage: data.message};
-					throw err;
-				})
-			} else {
-				let err = {errorMessage: 'Server is not responding'};
-				throw err;
-			}
-		}
-		return res.json();
-	})
+export async function removeForm(id) {
+    const deleteURL = APIURL + id;
+    return fetch(deleteURL, {
+        method: 'delete'
+    })
+        .then(res => {
+            if (!res.ok) {
+                if (res.status >= 400 && res.status < 500) {
+                    return res.json().then(data => {
+                        let err = { errorMessage: data.message };
+                        throw err;
+                    })
+                } else {
+                    let err = { errorMessage: 'Server is not responding' };
+                    throw err;
+                }
+            }
+            return res.json();
+        })
 }

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-const ApprovalItem = ({ _id, template, author, submission_date, header, status, onDelete }) => {
+const ApprovalItem = ({ _id, template, author, submission_date, header, status, userName, onDelete }) => {
     return (
         <div className="col-sm-6 col-md-6 col-lg-6 col-xl-3">
             <div className="card bg-light mb-3" style={{ "width": "18rem" }}>
@@ -16,6 +16,7 @@ const ApprovalItem = ({ _id, template, author, submission_date, header, status, 
                             state: {
                                 id: _id,
                                 header: header,
+                                userName: userName,
                                 status: status.toLowerCase()
                             }
                         }}>

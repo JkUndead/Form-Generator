@@ -18,6 +18,7 @@ class NewForm extends Component {
             confirmation_status: false,
             elements: [],
             elementValues: {},
+            managerList: [],
             validValues: false,
             formValid: false,
             formErrors: {
@@ -39,7 +40,8 @@ class NewForm extends Component {
             title: template.title,
             description: template.description,
             elements: template.elements,
-            templateId: this.props.location.state.id
+            templateId: this.props.location.state.id,
+            managerList: template.managers
         })
     }
 
@@ -62,11 +64,11 @@ class NewForm extends Component {
         await FormAPICalls.createForm(value);
     }
 
-    wait3Sec() { 
+    wait3Sec() {
         return new Promise(resolve => {
-          setTimeout(() => {
-            resolve();
-          }, 3000);
+            setTimeout(() => {
+                resolve();
+            }, 3000);
         });
     }
 

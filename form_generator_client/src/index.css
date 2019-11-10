@@ -11,7 +11,8 @@ body,
   box-sizing: border-box;
 }
 
-.App {
+
+body {
   background: #8a8a8a;
 }
 
@@ -26,6 +27,7 @@ section {
   align-items: center;
   padding: 100px 80px;
 }
+
 .container {
   width: 60%;
   border-radius: 2%;
@@ -34,6 +36,7 @@ section {
 .jumbotron .container {
   width: 100%;
 }
+
 .grid {
   width: 100%;
   display: flex;
@@ -48,7 +51,7 @@ section {
 }
 
 ol span {
-  margin-left: 20px ;
+  margin-left: 20px;
   opacity: 0.5;
 }
 
@@ -141,7 +144,10 @@ h2 {
   margin: 1em;
 }
 
-
+.search-bar {
+  width: 40%;
+  border-radius: 0%;
+}
 
 #AboutUs,
 .packages {

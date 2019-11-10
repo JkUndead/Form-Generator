@@ -37,7 +37,6 @@ class UpdateTemplate extends Component {
             showPopup: false,
             showUpdate: false,
             updateId: ""
-
         }
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -239,7 +238,6 @@ class UpdateTemplate extends Component {
         return (
             <div className="container bg-light">
                 <h1 className="text-center mt-4 mb-4 p-3">EDIT TEMPLATE</h1>
-
                 <div className="row justify-content-md-center">
                     <div className="col-8">
                         <div className="panel panel-default">
@@ -256,8 +254,8 @@ class UpdateTemplate extends Component {
                             formErrors={this.state.formErrors}
                             errorClass={this.errorClass.bind(this)}
                             addManager={this.addManager.bind(this)}
-                            managerValid = {this.state.managerValid}
-                            removeManager = {this.removeManager.bind(this)}
+                            managerValid={this.state.managerValid}
+                            removeManager={this.removeManager.bind(this)}
                         />
 
                         <div className="row">
@@ -299,7 +297,9 @@ class UpdateTemplate extends Component {
                                                 ), this.validateForm)
                                             }}
                                             required />
-                                        <label className="form-check-label" htmlFor="declaration">I confirm the above information is accurate and followed terms and conditions</label>
+                                        <label className="form-check-label" htmlFor="declaration">
+                                            I confirm the above information is accurate and followed terms and conditions
+                                        </label>
                                     </div>
                                 </div>
                             </div>

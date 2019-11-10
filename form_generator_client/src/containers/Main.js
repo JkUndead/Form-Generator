@@ -18,112 +18,114 @@ import NotFoundPage from "../pages/404";
 
 const Main = () => {
     return (
-      <div className="Main">
-        <Switch>
-            
-            <Route exact path="/" >
-                <Homepage />
-            </Route>
+        <div className="Main">
+            <Switch>
 
-            <Route 
-                exact 
-                path="/login" 
-                render={(props) => <Login {...props} 
-                isAuthed={true}/>}
-            />
+                <Route exact path="/" >
+                    <Homepage />
+                </Route>
 
-            <Route exact path="/templates">
-                <Templates />
-            </Route>
-            <Route exact path="/templates/new">
-                <NewTemplates />
-            </Route>
+                <Route
+                    exact
+                    path="/login"
+                    render={(props) => <Login {...props}
+                        isAuthed={true} />}
+                />
 
-            <Route 
-                exact 
-                path="/templates/:id" 
-                component={UpdateTemplate}
-            />
+                <Route exact path="/templates">
+                    <Templates />
+                </Route>
+                <Route exact path="/templates/new">
+                    <NewTemplates />
+                </Route>
 
-            <Route 
-                exact 
-                path="/forms" 
-                render={(props) => <Forms {...props} 
-                isAuthed={true}/>}
-            />
+                <Route
+                    exact
+                    path="/templates/:id"
+                    component={UpdateTemplate}
+                />
 
-            <Route 
-                exact 
-                path="/forms/new"
-                render={(props) =>  <NewForms {...props} 
-                isAuthed={true}/>}>
-            </Route>  
-            
-            <Route 
-                exact 
-                path="/forms/sent"
-                render={(props) =>  <SentPage {...props} 
-                isAuthed={true}/>}>
-            </Route> 
+                <Route
+                    exact
+                    path="/forms"
+                    render={(props) => <Forms {...props}
+                        isAuthed={true} />}
+                />
 
-            <Route 
-                exact 
-                path="/forms/sent/:id" 
-                render={(props) =>  <ShowForm {...props} 
-                isAuthed={true}/>}
-            />    
+                <Route
+                    exact
+                    path="/forms/new"
+                    render={(props) => <NewForms {...props}
+                        isAuthed={true} />}>
+                </Route>
 
-            <Route exact path="/forms/:user">
-                <Redirect to="/login"/> 
-            </Route>  
-                
+                <Route
+                    exact
+                    path="/forms/sent"
+                    render={(props) => <SentPage {...props}
+                        isAuthed={true} />}>
+                </Route>
 
-            <Route exact path="/pending">
-                <Pending />
-            </Route>
+                <Route
+                    exact
+                    path="/forms/sent/:id"
+                    render={(props) => <ShowForm {...props}
+                        isAuthed={true} />}
+                />
 
-            <Route 
-                exact 
-                path="/pending/:id" 
-                render={(props) =>  <PendingForm {...props} 
-                isAuthed={true}/>}
-            /> 
+                <Route exact path="/forms/:user">
+                    <Redirect to="/login" />
+                </Route>
 
-            <Route 
-                exact 
-                path="/approved" 
-                render={(props) =>  <Approved {...props} 
-                isAuthed={true}/>}
-            /> 
+                <Route
+                    exact
+                    path="/pending"
+                    render={(props) => <Pending {...props}
+                        isAuthed={true} />}
+                />
 
-            <Route 
-                exact 
-                path="/approved/:id" 
-                render={(props) =>  <ApprovedForm {...props} 
-                isAuthed={true}/>}
-            /> 
+                <Route
+                    exact
+                    path="/pending/:id"
+                    render={(props) => <PendingForm {...props}
+                        isAuthed={true} />}
+                />
 
-            <Route 
-                exact 
-                path="/rejected" 
-                render={(props) =>  <Rejected {...props} 
-                isAuthed={true}/>}
-            /> 
+                <Route
+                    exact
+                    path="/approved"
+                    render={(props) => <Approved {...props}
+                        isAuthed={true} />}
+                />
 
-            <Route  
-                exact 
-                path="/rejected/:id" 
-                render={(props) =>  <ApprovedForm {...props} 
-                isAuthed={true}/>}
-            /> 
+                <Route
+                    exact
+                    path="/approved/:id"
+                    render={(props) => <ApprovedForm {...props}
+                        isAuthed={true} />}
+                />
 
-            <Route exact path="/404">
-                <NotFoundPage />
-            </Route>
+                <Route
+                    exact
+                    path="/rejected"
+                    render={(props) => <Rejected {...props}
+                        isAuthed={true} />}
+                />
 
-            <Redirect to="/404"/> 
-        </Switch>
-      </div>
+                <Route
+                    exact
+                    path="/rejected/:id"
+                    render={(props) => <ApprovedForm {...props}
+                        isAuthed={true} />}
+                />
+
+                <Route exact path="/404">
+                    <NotFoundPage />
+                </Route>
+
+                <Redirect to="/404" />
+            </Switch>
+        </div>
     );
 };
 

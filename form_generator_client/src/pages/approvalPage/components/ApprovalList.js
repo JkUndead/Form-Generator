@@ -18,7 +18,21 @@ class ApprovaList extends Component {
 
     async loadForms() {
         const allForms = await apiCalls.getForms();
-        const forms = allForms.filter(form => (form.status === this.props.status))
+        const forms = allForms.filter(form => {
+            let current = false;
+            // check current manager and manager name
+            form.managerList.forEach((manager, index) => {
+                if (
+                    manager.managerName.toLowerCase() === this.props.userName.toLowerCase()
+                    && (index === (Number(form.currentProgress))
+                        || (form.currentProgress === "-1"))
+                ) {
+                    current = true;
+                }
+            });
+
+            return (form.status === this.props.status && current)
+        })
         this.setState({ forms })
         this.checkList();
     }
@@ -29,17 +43,17 @@ class ApprovaList extends Component {
         this.setState({ forms: forms }, this.checkList);
     }
 
-    checkList(){
+    checkList() {
         let hasPending = this.state.hasPending;
-        if(this.state.forms.length === 0) {
+        if (this.state.forms.length === 0) {
             let message = this.state.message;
             const status = this.props.status.toLowerCase();
-            message = "You have no " + status +  " form";
+            message = "You have no " + status + " form";
             hasPending = false;
-            this.setState({message: message, hasPending: hasPending});
+            this.setState({ message: message, hasPending: hasPending });
         } else {
             hasPending = true;
-            this.setState({hasPending: hasPending})
+            this.setState({ hasPending: hasPending })
         }
     }
 
@@ -49,8 +63,9 @@ class ApprovaList extends Component {
             <ApprovalItem
                 key={f._id}
                 {...f}
-                header = {this.props.header}
-                onDelete = {this.deleteForm.bind(this, f._id)}
+                header={this.props.header}
+                onDelete={this.deleteForm.bind(this, f._id)}
+                userName={this.props.userName.toLowerCase()}
             />
         ));
         return (
@@ -58,7 +73,7 @@ class ApprovaList extends Component {
                 <div className="container-fluid">
                     <div className="jumbotron" style={{ "marginTop": "20px" }}>
                         <div className="container">
-                            <h1 className="display-4"><b>{this.props.status} Forms</b></h1>
+                            <h1 className="display-4"><b><span>[{this.props.userName.toUpperCase()}]: </span>{this.props.status} Forms</b></h1>
                         </div>
                     </div>
                     {this.state.hasPending ?

@@ -9,6 +9,16 @@ const formSchema = new mongoose.Schema({
     title: String
   },
 
+  managerList: [
+    {
+      id: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User'
+      },
+      managerName: String
+    }
+  ],
+
   author: {
     id: {
       type: mongoose.Schema.Types.ObjectId,
@@ -20,12 +30,12 @@ const formSchema = new mongoose.Schema({
   status: {
     type: String
   },
-  cuurentProgress: {
+  currentProgress: {
     type: String
   },
 
   elementValues: {},
-  
+
   submission_date: {
     type: Date
   }

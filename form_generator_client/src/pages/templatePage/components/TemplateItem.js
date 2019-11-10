@@ -7,7 +7,7 @@ const TemplateItem = ({ _id, title, owner, duration, onDelete }) => {
             <div className="card bg-light mb-3" style={{ "width": "18rem" }}>
                 <div className="card-header">{title}</div>
                 <div className="card-body">
-                    
+
                     <h6 className="card-subtitle mb-2 text-muted">{owner}</h6>
                     <p className="card-text">{duration}</p>
                     <span className="card-link">

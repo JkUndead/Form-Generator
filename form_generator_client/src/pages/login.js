@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {Link} from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 class LoginForm extends Component {
     constructor(props) {
@@ -7,6 +7,7 @@ class LoginForm extends Component {
         this.state = {
             username: "",
             role: this.props.location.state.header,
+            path: "",
             userValid: false,
             formValid: false
         };
@@ -14,11 +15,22 @@ class LoginForm extends Component {
         this.handleSubmit = this.handleSubmit.bind(this);
     }
 
+    componentDidMount() {
+        let path = this.state.path;
+        if (this.state.role === "Manager") {
+            path = "/pending"
+        }
+        else {
+            path = "/forms/sent"
+        }
+        this.setState({ path: path })
+    }
+
     handleChange(event) {
         const name = event.target.name;
         const value = event.target.value;
         this.setState({ [name]: value },
-            () => { this.validateField(name, value)})
+            () => { this.validateField(name, value) })
     }
 
     validateField(field, value) {
@@ -37,8 +49,7 @@ class LoginForm extends Component {
 
     validateForm() {
         this.setState({
-            formValid: 
-                this.state.userValid 
+            formValid: this.state.userValid
         })
     }
 
@@ -50,15 +61,15 @@ class LoginForm extends Component {
 
     render() {
         return (
-            <div className="container bg-light">
+            <div className="container search-bar bg-light">
                 <h1 className="text-center mt-4 mb-4">Welcome to Form Generator</h1>
 
                 <div className="row justify-content-md-center">
                     <div className="col-6">
                         <form>
                             <div className="form-group row">
-                                <label className="col-sm-4 col-md-2 col-form-label" htmlFor="username">Username: </label>
-                                <div className="col-sm-8 col-md-10">
+                                <label className="col-sm-4 col-md-4 col-form-label pr-0" htmlFor="username">Username: </label>
+                                <div className="col-sm-8 col-md-8 pl-0">
                                     <input
                                         className="form-control"
                                         type="text"
@@ -69,25 +80,27 @@ class LoginForm extends Component {
                                         required autoFocus />
                                 </div>
                             </div>
-                            
 
+                            <div className="form-group row">
+                                <div className="col-sm-5 col-md-12 text-center">
+                                    <Link to={{
+                                        pathname: `${this.state.path}`,
+                                        state: {
+                                            header: this.state.role,
+                                            userName: this.state.username
+                                        }
 
-                            <br />
-                            <Link to={{
-                                pathname: "/forms/sent",
-                                state: {
-                                    header: this.state.role,
-                                    userName: this.state.username
-                                }
-
-                            }} >
-                                <button
-                                    disabled={!this.state.formValid}
-                                    className="btn btn-primary text-center"
-                                    //onClick={this.handleSubmit}
-                                >Search
+                                    }} >
+                                        <button
+                                            disabled={!this.state.formValid}
+                                            className="btn btn-primary text-center"
+                                        // onClick={this.handleSubmit}
+                                        >Search
                                     </button>
-                            </Link>
+                                    </Link>
+                                </div>
+                            </div>
+
                         </form>
                     </div>
                 </div>
