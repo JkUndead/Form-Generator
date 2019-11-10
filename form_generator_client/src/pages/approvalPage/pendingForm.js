@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import * as apiCalls from '../../services/forms_api';
 import * as userAPI from '../../services/users_api';
-import * as templateAPI from '../../services/templates_api';
 import SubmittedElements from '../formPage/components/SubmittedElements';
 
 class PendingForm extends Component {
