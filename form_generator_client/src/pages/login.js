@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import * as apiCalls from '../services/users_api'
+import Background_Img from "../images/Background2.jpg";
 
 class LoginForm extends Component {
     constructor(props) {
@@ -87,46 +88,50 @@ class LoginForm extends Component {
 
     render() {
         return (
-            <div className="container search-bar bg-light" style={{ "marginTop": "200px" }}>
-                <h1 className="text-center mt-4 mb-4">Please Enter Your User Name</h1>
+            <div className="Homepage">
+                <img src={Background_Img} alt="background-img" className="Background" />
+                <div className="login-form" >
+                    <h1 className="text-center mt-4 mb-4">Please Enter Your User Name</h1>
 
-                <div className="row justify-content-md-center d-flex align-items-center">
-                    <div className="col-6">
-                        <div className='panel panel-default'>
-                            {!this.state.isExisted ?
-                                <span>{this.state.errorMsg}</span> :
-                                ""
-                            }
-                        </div>
-                        <form onSubmit={e => { e.preventDefault(); }}>
-                            <div className="form-group row">
-                                <label className="col-sm-4 col-md-4 col-form-label pr-0" htmlFor="username">Username: </label>
-                                <div className="col-sm-8 col-md-8 pl-0">
-                                    <input
-                                        className="form-control"
-                                        type="text"
-                                        id="username"
-                                        name="username"
-                                        value={this.state.username}
-                                        onChange={this.handleChange.bind(this)}
-                                        required autoFocus />
+                    <div className="row justify-content-md-center d-flex align-items-center">
+                        <div className="col-6">
+                            <div className='panel panel-default'>
+                                {!this.state.isExisted ?
+                                    <span>{this.state.errorMsg}</span> :
+                                    ""
+                                }
+                            </div>
+                            <form onSubmit={e => { e.preventDefault(); }}>
+                                <div className="form-group row">
+                                    <label className="col-sm-4 col-md-4 col-form-label pr-0" htmlFor="username">Username: </label>
+                                    <div className="col-sm-8 col-md-8 pl-0">
+                                        <input
+                                            className="form-control"
+                                            type="text"
+                                            id="username"
+                                            name="username"
+                                            value={this.state.username}
+                                            onChange={this.handleChange.bind(this)}
+                                            required autoFocus />
+                                    </div>
                                 </div>
+
+                            </form>
+                            <div className="row justify-content-center mb-3">
+                                <button
+                                    disabled={!this.state.formValid}
+                                    className="btn btn-primary btn-lg text-center"
+                                    onClick={this.handleSubmit}
+                                >Search
+                            </button>
                             </div>
 
-                        </form>
-                        <div className="row justify-content-center mb-3">
-                            <button
-                                disabled={!this.state.formValid}
-                                className="btn btn-primary text-center"
-                                onClick={this.handleSubmit}
-                            >Search
-                            </button>
                         </div>
-
                     </div>
-                </div>
 
-            </div >
+                </div >
+            </div>
+
         )
     }
 }
