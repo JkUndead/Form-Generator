@@ -68,7 +68,7 @@ class LoginForm extends Component {
             }
         });
         if (!isExisted) {
-            event.preventDefault();
+            //event.preventDefault();
             msg = "Error: User is not found";
             this.setState({ errorMsg: msg })
         } else {
@@ -87,7 +87,7 @@ class LoginForm extends Component {
 
     render() {
         return (
-            <div className="container search-bar bg-light" style={{ "margin-top": "200px" }}>
+            <div className="container search-bar bg-light" style={{ "marginTop": "200px" }}>
                 <h1 className="text-center mt-4 mb-4">Please Enter Your User Name</h1>
 
                 <div className="row justify-content-md-center d-flex align-items-center">
@@ -98,7 +98,7 @@ class LoginForm extends Component {
                                 ""
                             }
                         </div>
-                        <form>
+                        <form onSubmit={e => { e.preventDefault(); }}>
                             <div className="form-group row">
                                 <label className="col-sm-4 col-md-4 col-form-label pr-0" htmlFor="username">Username: </label>
                                 <div className="col-sm-8 col-md-8 pl-0">
