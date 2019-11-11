@@ -1,13 +1,14 @@
 import React, { Component } from 'react';
-import { Link } from 'react-router-dom';
+import * as apiCalls from '../services/users_api'
 
 class LoginForm extends Component {
     constructor(props) {
         super(props);
         this.state = {
             username: "",
-            role: this.props.location.state.header,
+            role: this.props.location.state !== undefined ? this.props.location.state.header : "",
             path: "",
+            errorMsg: "",
             userValid: false,
             formValid: false
         };
@@ -53,19 +54,50 @@ class LoginForm extends Component {
         })
     }
 
-    handleSubmit(event) {
-        console.log(this.state);
-        event.preventDefault();
+    async handleSubmit(event) {
+        //event.preventDefault();
+        const users = await apiCalls.getUsers();
+        let msg = this.state.errorMsg;
+        let user,
+            isExisted = false;
+        users.forEach(u => {
+            if (u.username.toLowerCase() === this.state.username.toLowerCase()
+                && u.role === this.state.role) {
+                user = u.username;
+                isExisted = true;
+            }
+        });
+        if (!isExisted) {
+            event.preventDefault();
+            msg = "Error: User is not found";
+            this.setState({ errorMsg: msg })
+        } else {
+            this.setState({ username: user });
+            console.log(this.state.username);
+            this.props.history.push({
+                pathname: `${this.state.path}`,
+                state: {
+                    header: this.state.role,
+                    userName: this.state.username
+                }
+            })
+        }
     }
 
 
     render() {
         return (
-            <div className="container search-bar bg-light">
-                <h1 className="text-center mt-4 mb-4">Welcome to Form Generator</h1>
+            <div className="container search-bar bg-light" style={{ "margin-top": "200px" }}>
+                <h1 className="text-center mt-4 mb-4">Please Enter Your User Name</h1>
 
-                <div className="row justify-content-md-center">
+                <div className="row justify-content-md-center d-flex align-items-center">
                     <div className="col-6">
+                        <div className='panel panel-default'>
+                            {!this.state.isExisted ?
+                                <span>{this.state.errorMsg}</span> :
+                                ""
+                            }
+                        </div>
                         <form>
                             <div className="form-group row">
                                 <label className="col-sm-4 col-md-4 col-form-label pr-0" htmlFor="username">Username: </label>
@@ -81,27 +113,16 @@ class LoginForm extends Component {
                                 </div>
                             </div>
 
-                            <div className="form-group row">
-                                <div className="col-sm-5 col-md-12 text-center">
-                                    <Link to={{
-                                        pathname: `${this.state.path}`,
-                                        state: {
-                                            header: this.state.role,
-                                            userName: this.state.username
-                                        }
-
-                                    }} >
-                                        <button
-                                            disabled={!this.state.formValid}
-                                            className="btn btn-primary text-center"
-                                        // onClick={this.handleSubmit}
-                                        >Search
-                                    </button>
-                                    </Link>
-                                </div>
-                            </div>
-
                         </form>
+                        <div className="row justify-content-center mb-3">
+                            <button
+                                disabled={!this.state.formValid}
+                                className="btn btn-primary text-center"
+                                onClick={this.handleSubmit}
+                            >Search
+                            </button>
+                        </div>
+
                     </div>
                 </div>
 

@@ -83,7 +83,7 @@ class NewForm extends Component {
             />
         ))
         return (
-            <div className="container bg-light">
+            <div className="container bg-light mb-4">
                 <h1 className="text-center mb-4 mt-4 p-3">{title}</h1>
                 <div className="row justify-content-md-center">
                     <div className="col-8">

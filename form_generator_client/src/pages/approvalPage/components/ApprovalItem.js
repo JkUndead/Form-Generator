@@ -9,7 +9,7 @@ const ApprovalItem = ({ _id, template, author, submission_date, header, status, 
                 <div className="card-body">
 
                     <h6 className="card-subtitle mb-2 text-muted">Sender: {author.username}</h6>
-                    <p className="card-text"><i>Submitted on: <br></br></i>{submission_date}</p>
+                    <p className="card-text"><i>Submitted on: <br></br></i>{submission_date.slice(0, 10).replace(/-/g, "/")}</p>
                     <span className="card-link">
                         <Link to={{
                             pathname: `/${status.toLowerCase()}/${_id}`,
