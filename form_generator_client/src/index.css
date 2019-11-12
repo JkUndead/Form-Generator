@@ -91,6 +91,22 @@ code {
   color: black
 }
 
+.navbar li {
+  margin: 0 20px 0 20px;
+}
+
+.navbar a {
+  color: white
+}
+
+.navbar a:hover {
+  color: black
+}
+
+.navbar .active {
+  color: black
+}
+
 /* Home page */
 
 .Background {
