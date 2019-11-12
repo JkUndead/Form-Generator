@@ -69,11 +69,11 @@ code {
 
 
 /* Navbar */
-.navbar-brand {
+/* .navbar-brand {
   Position: relative;
   bottom: 20px;
 
-}
+} */
 
 .navbar {
 
@@ -84,6 +84,11 @@ code {
   width: 100%;
 
   opacity: 0.9;
+}
+
+
+.navbar-text {
+  color: black
 }
 
 /* Home page */

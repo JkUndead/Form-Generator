@@ -62,6 +62,7 @@ class LoginForm extends Component {
         let user,
             isExisted = false;
         users.forEach(u => {
+            console.log(u)
             if (u.username.toLowerCase() === this.state.username.toLowerCase()
                 && u.role === this.state.role) {
                 user = u.username;
@@ -72,6 +73,7 @@ class LoginForm extends Component {
             //event.preventDefault();
             msg = "Error: User is not found";
             this.setState({ errorMsg: msg })
+            console.log(user)
         } else {
             this.setState({ username: user });
             console.log(this.state.username);

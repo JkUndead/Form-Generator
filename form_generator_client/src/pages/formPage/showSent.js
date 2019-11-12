@@ -25,12 +25,12 @@ class ShowSent extends Component {
     async loadForm(id) {
         const form = await apiCalls.getOneForm(id);
         let elements = form.elementValues;
-        let elementValues= [];
-        if(elements !== undefined){
+        let elementValues = [];
+        if (elements !== undefined) {
             elementValues = Object.keys(elements).map(key => (
-                {[key]: elements[key]}
+                { [key]: elements[key] }
             ))
-        } 
+        }
         const title = form.template.title,
             status = form.status,
             author = form.author.username;
@@ -48,8 +48,8 @@ class ShowSent extends Component {
 
     render() {
         const { title, author, status } = this.state;
-        const elementValues = this.state.elementValues.map((e,index) => (
-            <SubmittedElements  
+        const elementValues = this.state.elementValues.map((e, index) => (
+            <SubmittedElements
                 key={index}
                 {...e}
             />
@@ -67,13 +67,13 @@ class ShowSent extends Component {
                         </div>
 
                         {elementValues}
-   
+
                         <form>
                             <div className=" form-group row justify-content-md-center">
                                 <Link to={{
                                     pathname: "/forms/sent",
                                     state: {
-                                        header: this.props.location.state.header,
+                                        role: this.props.location.state.role,
                                         userName: this.state.author
                                     }
                                 }} >

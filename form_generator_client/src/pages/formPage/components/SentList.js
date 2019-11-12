@@ -9,33 +9,33 @@ class SentList extends Component {
             sentForms: [],
             hasSent: false,
             message: "Loading..",
-            role: this.props.role.toLowerCase()
+            role: this.props.role
         }
     }
 
     componentDidMount() {
         this.loadForms();
-        
+
     }
 
     async loadForms() {
         const forms = await apiCalls.getForms();
         const sentForms = forms.filter((form) => {
-            while (form.author === undefined) {continue;}
+            while (form.author === undefined) { continue; }
             return (
-                form.author.username.toLowerCase() === this.props.username.toLowerCase() 
+                form.author.username.toLowerCase() === this.props.username.toLowerCase()
             )
         })
         this.setState({ sentForms })
         let hasSent = this.state.hasSent;
-        if (this.state.sentForms.length > 0){
+        if (this.state.sentForms.length > 0) {
             this.setState({ hasSent: !hasSent })
         } else {
             let message = this.state.message;
             message = "You have no submitted form";
-            this.setState({message: message});
+            this.setState({ message: message });
         }
-        
+
     }
 
 
@@ -44,7 +44,7 @@ class SentList extends Component {
             <SentItem
                 key={f._id}
                 {...f}
-
+                role={this.state.role}
             />
         ));
         return (

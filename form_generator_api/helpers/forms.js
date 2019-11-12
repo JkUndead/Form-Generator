@@ -77,7 +77,7 @@ exports.getForm = function (req, res) {
 exports.updateForm = function (req, res) {
 	db.Form.findOneAndUpdate({ _id: req.params.formId }, req.body)
 		.then(foundForm => {
-			if (foundForm.currentProgress === '-1') {
+			if (req.body.currentProgress === '-1') {
 				let mailOptions = {
 					from: "murdochformflow@gmail.com",
 					to: req.body.email,

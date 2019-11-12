@@ -14,7 +14,7 @@ class NewForm extends Component {
             templateId: "",
             userName: "",
             email: "",
-            role: this.props.location.state.header.toLowerCase(),
+            role: this.props.location.state.header,
             confirmation_status: false,
             elements: [],
             elementValues: {},
