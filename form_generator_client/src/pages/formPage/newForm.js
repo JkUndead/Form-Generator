@@ -169,10 +169,9 @@ class NewForm extends Component {
                                     </button>
                                     </Link>
                                     <Link to={{
-                                        pathname: "/forms/sent",
+                                        pathname: "/forms",
                                         state: {
                                             header: this.props.location.state.header,
-                                            userName: this.state.userName
                                         }
 
                                     }} >

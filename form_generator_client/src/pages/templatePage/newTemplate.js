@@ -52,7 +52,7 @@ class NewTemplate extends Component {
         const availableManagers = users.filter(user => (
             user.role === "Manager"
         ))
-        this.setState({availableManagers: availableManagers})
+        this.setState({ availableManagers: availableManagers })
     }
 
     handleChange(event) {
@@ -87,9 +87,9 @@ class NewTemplate extends Component {
                 return element
             }
         })
-        this.setState({ 
+        this.setState({
             elements: elements,
-            updateId: "" 
+            updateId: ""
         })
     }
 
@@ -103,7 +103,7 @@ class NewTemplate extends Component {
     removeManager(id) {
         let assignedManager = this.state.assignedManager;
         assignedManager.splice(id, 1);
-        this.setState({assignedManager: assignedManager})
+        this.setState({ assignedManager: assignedManager })
     }
 
     validateField(field, value) {
@@ -137,8 +137,8 @@ class NewTemplate extends Component {
             default:
                 break;
         }
-        elementsValid = (this.state.elements.length >=5 || this.state.elements.length === 0) ;
-        fieldValidationErr.elements = elementsValid ? "": "are not enough. A template must has at least 5 elements."
+        elementsValid = (this.state.elements.length >= 5 || this.state.elements.length === 0);
+        fieldValidationErr.elements = elementsValid ? "" : "are not enough. A template must has at least 5 elements."
         this.setState({
             formErrors: fieldValidationErr,
             titleValid: titleValid,
@@ -181,13 +181,13 @@ class NewTemplate extends Component {
         let assignedManager = this.state.assignedManager;
         let isExisted = false;
         assignedManager.forEach(manager => {
-            if(manager._id === assigned._id) {
+            if (manager._id === assigned._id) {
                 isExisted = !isExisted;
             }
         })
-        if(!isExisted) {
+        if (!isExisted) {
             assignedManager.push(assigned);
-            this.setState({assignedManager: assignedManager})
+            this.setState({ assignedManager: assignedManager })
         }
         event.preventDefault();
     }
@@ -202,10 +202,10 @@ class NewTemplate extends Component {
     }
 
     render() {
-        const { title, owner, description, duration, elements, showUpdate, showPopup, updateId, availableManagers, assignedManager} = this.state;
+        const { title, owner, description, duration, elements, showUpdate, showPopup, updateId, availableManagers, assignedManager } = this.state;
         return (
             <div className="container bg-light">
-                <h1 className="text-center mt-4 mb-4">NEW TEMPLATE</h1>
+                <h1 className="text-center mt-4 mb-4 p-3">NEW TEMPLATE</h1>
 
                 <div className="row justify-content-md-center">
                     <div className="col-8">
@@ -217,14 +217,14 @@ class NewTemplate extends Component {
                             owner={owner}
                             description={description}
                             duration={duration}
-                            availableManagers = {availableManagers}
-                            assignedManager = {assignedManager}
+                            availableManagers={availableManagers}
+                            assignedManager={assignedManager}
                             handleChange={this.handleChange.bind(this)}
                             formErrors={this.state.formErrors}
                             errorClass={this.errorClass.bind(this)}
-                            addManager = {this.addManager.bind(this)}
-                            managerValid = {this.state.managerValid}
-                            removeManager = {this.removeManager.bind(this)}
+                            addManager={this.addManager.bind(this)}
+                            managerValid={this.state.managerValid}
+                            removeManager={this.removeManager.bind(this)}
                         />
 
                         <div className="row">

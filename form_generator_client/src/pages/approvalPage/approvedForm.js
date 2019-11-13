@@ -14,7 +14,7 @@ class ApprovedForm extends Component {
             elementValues: [],
             formValid: true,
         }
-        
+
     }
 
     componentDidMount() {
@@ -23,7 +23,7 @@ class ApprovedForm extends Component {
     }
 
     async loadForm(id) {
-        const form = await apiCalls.getOneForm(id);      
+        const form = await apiCalls.getOneForm(id);
         let elements = form.elementValues;
         let elementValues = [];
         if (elements !== undefined) {
@@ -73,7 +73,7 @@ class ApprovedForm extends Component {
                                         pathname: `/${this.props.location.state.status}`,
                                         state: {
                                             header: this.props.location.state.header,
-                                            userName: this.state.author
+                                            userName: this.props.location.state.userName
                                         }
                                     }} >
                                         <button
@@ -83,7 +83,7 @@ class ApprovedForm extends Component {
                                     </button>
                                     </Link>
                                 </div>
-                                
+
                             </div>
 
                         </form>

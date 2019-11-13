@@ -6,7 +6,7 @@ const Rejected = (props) => {
     return (
         <div className="d-flex">
             <SideBar
-                header="Manager"
+                header={userName}
                 listItems={["Pending", "Approved", "Rejected"]}
                 paths={["/pending", "/approved", "/rejected"]}
                 userName={userName}

@@ -73,7 +73,7 @@ class ApprovaList extends Component {
                 <div className="container-fluid">
                     <div className="jumbotron" style={{ "marginTop": "20px" }}>
                         <div className="container">
-                            <h1 className="display-4"><b><span>[{this.props.userName.toUpperCase()}]: </span>{this.props.status} Forms</b></h1>
+                            <h1 className="display-4"><b>{this.props.status} Forms</b></h1>
                         </div>
                     </div>
                     {this.state.hasPending ?
