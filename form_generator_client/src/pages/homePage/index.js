@@ -25,7 +25,7 @@ const Homepage = () => {
                                 header: 'Staff'
                             }
                         }}>
-                            <button className="btn btn-success btn-lg">Staff</button>
+                            <button className="btn btn-warning btn-lg">Staff</button>
                         </Link>
                     </li>
                     <li>
@@ -35,7 +35,7 @@ const Homepage = () => {
                                 header: 'Student'
                             }
                         }}>
-                            <button className="btn btn-success btn-lg">Student</button>
+                            <button className="btn btn-warning btn-lg">Student</button>
                         </Link>
                     </li>
                     <li>

@@ -12,11 +12,11 @@ const BarElements = ({ item, path, header, userName }) => {
                     userName: userName
                 }
             }}
-                className="active text-light border-bottom border-top list-group-item list-group-item-action bg-dark "
+                className="list-group-item list-group-item-action "
                 id={`navside${item}`}
 
             >
-                {item}
+                {item.toUpperCase()}
             </Link>
         </div>
     )

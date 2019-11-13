@@ -13,8 +13,8 @@ const SideBar = (props) => {
         />
     ))
     return (
-        <div className="bg-dark border-right" id="sidebar-wrapper">
-            <div className="text-light sidebar-heading">{header}</div>
+        <div className="border-right" id="sidebar-wrapper">
+            <div className="sidebar-heading">{header.toUpperCase()}</div>
             {items}
         </div>
     )
