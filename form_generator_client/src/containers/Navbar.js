@@ -9,13 +9,12 @@ class Navbar extends Component {
             admin: false,
             staff: false,
             student: false,
-            manager: false
+            manager: false,
         }
         this.handleClick = this.handleClick.bind(this)
     }
 
     handleClick(event) {
-        window.location.reload();
         const defaultVal = false
         this.setState({
             admin: defaultVal,
@@ -24,7 +23,7 @@ class Navbar extends Component {
             manager: defaultVal
         })
         const name = event.target.name
-        console.log(event.target.name)
+
         this.setState(prevState => (
             { [name]: !prevState.name }
         ))

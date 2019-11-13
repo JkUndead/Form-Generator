@@ -14,10 +14,16 @@ class FormList extends Component {
         this.loadForms();
     }
 
+    componentDidUpdate(prevProps) {
+        if (this.props.header !== prevProps.header) {
+            this.loadForms()
+        }
+    }
+
     async loadForms() {
         let templates = await apiCalls.getTemplates();
         let forms = templates.filter(template => (template.owner === this.props.header.toLowerCase()))
-        this.setState({forms})
+        this.setState({ forms })
     }
 
     render() {
@@ -26,9 +32,10 @@ class FormList extends Component {
                 key={f._id}
                 {...f}
                 header={this.props.header}
-                
+
             />
         ));
+        // window.location.reload();
         return (
             <div id="page-content-wrapper">
                 <div className="container-fluid">
@@ -37,7 +44,7 @@ class FormList extends Component {
                             <h1 className="display-4"><b>Available Forms</b></h1>
                         </div>
                     </div>
-                    <div className="row" style={{"display":"flex", "flexWrap": "wrap"}} >
+                    <div className="row" style={{ "display": "flex", "flexWrap": "wrap" }} >
                         {forms}
                     </div>
                 </div>
