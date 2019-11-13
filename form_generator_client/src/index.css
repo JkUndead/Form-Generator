@@ -14,7 +14,8 @@ body,
 .bg-text button,
 .card button,
 .jumbotron button,
-.container button {
+.container button,
+.login-form button {
   border-radius: 40px;
 }
 
