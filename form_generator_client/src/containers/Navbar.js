@@ -15,7 +15,7 @@ class Navbar extends Component {
     }
 
     handleClick(event) {
-        console.log('click')
+        window.location.reload();
         const defaultVal = false
         this.setState({
             admin: defaultVal,
@@ -28,6 +28,7 @@ class Navbar extends Component {
         this.setState(prevState => (
             { [name]: !prevState.name }
         ))
+
     }
 
     render() {
