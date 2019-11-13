@@ -49,7 +49,7 @@ class Navbar extends Component {
                         <ul className=' nav navbar-nav '>
                             <li className='nav-item' >
                                 <Link className={`nav-link${admin}`} name='admin' onClick={this.handleClick} to='/templates'>
-                                    Admin
+                                    ADMIN
                         </Link>
                             </li>
                             <li className='nav-item' >
@@ -58,7 +58,7 @@ class Navbar extends Component {
                                     state: {
                                         header: 'Staff'
                                     }
-                                }}>Staff</Link>
+                                }}>STAFF</Link>
                             </li>
                             <li className='nav-item' >
                                 <Link className={`nav-link${student}`} name='student' onClick={this.handleClick} to={{
@@ -66,7 +66,7 @@ class Navbar extends Component {
                                     state: {
                                         header: 'Student'
                                     }
-                                }}>Student
+                                }}>STUDENT
                         </Link>
                             </li>
                             <li className='nav-item' >
@@ -75,7 +75,7 @@ class Navbar extends Component {
                                     state: {
                                         header: 'Manager'
                                     }
-                                }}>Manager</Link>
+                                }}>MANAGER</Link>
                             </li>
                         </ul>
                     </div>

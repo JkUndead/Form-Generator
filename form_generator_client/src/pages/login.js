@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import * as apiCalls from '../services/users_api'
-import Background_Img from "../images/Background2.jpg";
+import Background_Img from "../images/background.jpg";
 
 class LoginForm extends Component {
     constructor(props) {

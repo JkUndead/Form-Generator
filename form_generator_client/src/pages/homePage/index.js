@@ -1,9 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import About from './components/About';
-import Background_Img from "../../images/Background2.jpg";
+import Background_Img from "../../images/background.jpg";
 import Package from './components/Package';
-import ContactUs from './components/ContactUs';
 import Footer from './components/Footer';
 
 const Homepage = () => {
@@ -16,7 +15,7 @@ const Homepage = () => {
                 <ul id="role_links" style={{ "padding": "0" }}>
                     <li>
                         <Link to='/templates'>
-                            <button className="btn btn-primary btn-lg"> Administrator</button>
+                            <button className="btn btn-info btn-lg"> Administrator</button>
                         </Link>
                     </li>
                     <li>
@@ -46,7 +45,7 @@ const Homepage = () => {
                                 header: 'Manager'
                             }
                         }}>
-                            <button className="btn btn-warning btn-lg">Manager</button>
+                            <button className="btn btn-danger btn-lg">Manager</button>
                         </Link>
                     </li>
                 </ul>
@@ -56,7 +55,6 @@ const Homepage = () => {
             <br></br>
             <About />
             <Package />
-            <ContactUs />
             <Footer />
         </div>
     );

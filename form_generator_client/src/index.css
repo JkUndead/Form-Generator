@@ -78,7 +78,7 @@ code {
 .navbar {
 
   margin-bottom: 0;
-  background-color: #DA1D2C;
+  background-color: #232020;
 
   height: 60px;
   width: 100%;
@@ -86,10 +86,6 @@ code {
   opacity: 0.9;
 }
 
-
-.navbar-text {
-  color: black
-}
 
 .navbar li {
   margin: 0 20px 0 20px;
@@ -100,11 +96,11 @@ code {
 }
 
 .navbar a:hover {
-  color: black
+  color: red
 }
 
 .navbar .active {
-  color: black
+  color: red
 }
 
 /* Home page */
