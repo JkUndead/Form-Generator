@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import SignatureCanvas from './components/SignatureCanvas'
 import * as apiCalls from '../../services/forms_api';
 import * as userAPI from '../../services/users_api';
 import SubmittedElements from '../formPage/components/SubmittedElements';
@@ -13,11 +14,12 @@ class PendingForm extends Component {
             author: "",
             email: "",
             currentProgress: "",
-            confirmation_status: true,
+            confirmation_status: false,
             elementValues: [],
             formValid: true,
         }
         this.handleSubmit = this.handleSubmit.bind(this);
+        this.signForm = this.signForm.bind(this)
     }
 
     componentDidMount() {
@@ -53,6 +55,10 @@ class PendingForm extends Component {
         })
     }
 
+    signForm() {
+        this.setState({ confirmation_status: true })
+    }
+
     async handleSubmit(event) {
         let currentProgress = this.state.currentProgress;
         let current = Number(this.state.currentProgress)
@@ -82,6 +88,7 @@ class PendingForm extends Component {
         )
     }
 
+
     render() {
         const { title, author, status } = this.state;
         const elementValues = this.state.elementValues.map((e, index) => (
@@ -103,6 +110,9 @@ class PendingForm extends Component {
                         </div>
 
                         {elementValues}
+
+                        <SignatureCanvas signForm={this.signForm} />
+
 
                         <form>
 
@@ -134,6 +144,7 @@ class PendingForm extends Component {
 
                                     }} >
                                         <button
+                                            disabled={!this.state.confirmation_status}
                                             className="btn btn-success"
                                             type="submit"
                                             value="Approved"
@@ -152,6 +163,7 @@ class PendingForm extends Component {
 
                                     }} >
                                         <button
+                                            disabled={!this.state.confirmation_status}
                                             className="btn btn-danger "
                                             value="Rejected"
                                             onClick={this.handleSubmit}

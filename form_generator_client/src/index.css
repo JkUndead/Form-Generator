@@ -74,6 +74,17 @@ code {
     monospace;
 }
 
+.card:hover {
+  box-shadow: 5px 5px 8px 5px #888888;
+}
+
+/* .card button:hover {
+  box-shadow: 5px 5px 8px 5px #888888;
+} */
+
+.jumbotron button:hover {
+  box-shadow: 2px 2px 3px 2px #888888;
+}
 
 /* Navbar */
 

@@ -8,8 +8,8 @@ const TemplateItem = ({ _id, title, owner, duration, onDelete }) => {
                 <div className="card-header">{title}</div>
                 <div className="card-body">
 
-                    <h6 className="card-subtitle mb-2 text-muted">{owner}</h6>
-                    <p className="card-text">{duration}</p>
+                    <h6 className="card-subtitle mb-2 text-muted">User: {owner.toUpperCase()}</h6>
+                    <p className="card-text">Duration: {duration}</p>
                     <span className="card-link">
                         <Link to={`/templates/${_id}`}>
                             <button style={{ "display": "inline", "margin": "2px" }} className="btn btn-warning">Update</button>

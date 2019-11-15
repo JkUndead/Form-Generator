@@ -44,6 +44,7 @@ class FormList extends Component {
                             <h1 className="display-4"><b>Available Forms</b></h1>
                         </div>
                     </div>
+                    <hr style={{ width: "100%" }} />
                     <div className="row" style={{ "display": "flex", "flexWrap": "wrap" }} >
                         {forms}
                     </div>

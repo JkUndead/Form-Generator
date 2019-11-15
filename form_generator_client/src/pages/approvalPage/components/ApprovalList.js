@@ -76,6 +76,7 @@ class ApprovaList extends Component {
                             <h1 className="display-4"><b>{this.props.status} Forms</b></h1>
                         </div>
                     </div>
+                    <hr style={{ width: "100%" }} />
                     {this.state.hasPending ?
                         <div className="row" style={{ "display": "flex", "flexWrap": "wrap" }} >
                             {forms}

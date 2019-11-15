@@ -22,7 +22,9 @@ class SentList extends Component {
         const forms = await apiCalls.getForms();
         const sentForms = forms.filter((form) => {
             while (form.author === undefined) { continue; }
+            console.log(form)
             return (
+
                 form.author.username.toLowerCase() === this.props.username.toLowerCase()
             )
         })

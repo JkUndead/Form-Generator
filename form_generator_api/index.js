@@ -31,7 +31,7 @@ app.use('/api/users', userRoutes);
 //USERS ROUTES
 app.use('/api/forms', formRoutes);
 
-seedDB(); //seed the database
+//seedDB(); //seed the database
 
 //=====================
 
