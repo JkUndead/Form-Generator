@@ -7,9 +7,9 @@ const FormItem = ({ _id, title, duration, header }) => {
             <div className="card bg-light mb-3" style={{ "width": "18rem" }}>
                 <div className="card-header">{title}</div>
                 <div className="card-body">
-                    
+
                     <h6 className="card-subtitle mb-2 text-muted">Duration: {duration}</h6>
-                    <p className="card-text">This forms is blah blah blah...</p>
+                    <p className="card-text">Click button below to start using this form.</p>
                     <span className="card-link">
                         <Link to={{
                             pathname: '/forms/new',
