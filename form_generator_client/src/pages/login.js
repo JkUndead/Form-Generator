@@ -112,31 +112,14 @@ class LoginForm extends Component {
             <div className="Homepage">
                 <img src={Background_Img} alt="background-img" className="Background" />
                 <div className="login-form" >
-                    <h1 className="text-center mt-4 mb-4">Please Enter Your User Name</h1>
+                    <h1 className="text-center mt-4 mb-2">Please Enter Your User Name</h1>
 
                     <div className="row justify-content-md-center d-flex align-items-center">
                         <div className="col-6">
-                            {/* <form onSubmit={e => { e.preventDefault(); }}>
-                                <div className="form-group row">
-                                    <label className="col-sm-4 col-md-4 col-form-label pr-0" htmlFor="username">Username: </label>
-                                    <div className="col-sm-8 col-md-8 pl-0">
-                                        <input
-                                            className="form-control"
-                                            type="text"
-                                            id="username"
-                                            name="username"
-                                            value={this.state.username}
-                                            onChange={this.handleChange.bind(this)}
-                                            required autoFocus />
-                                    </div>
-                                </div>
-
-                            </form> */}
                             <Form noValidate validated={this.state.validated} onSubmit={this.handleSubmit}>
                                 <Form.Group>
                                     <Form.Row>
-                                        <Form.Label className="col-sm-4 col-md-4 pr-0" >Username: </Form.Label>
-                                        <Form.Control className="col-sm-8 col-md-8 pl-0 mb-2"
+                                        <Form.Control className="col-sm-8 col-md-12 "
                                             required
                                             type="text"
                                             id="username"

@@ -214,13 +214,12 @@ hr {
 
 .login-form {
   font-size: 12px;
-  background-color: rgb(0, 0, 0);
+  background-color: white;
   /* Fallback color */
-  background-color: rgba(0, 0, 0, 0.4);
   /* Black w/opacity/see-through */
-  color: white;
+  color: black;
   font-weight: bold;
-  border: 3px solid #f1f1f1;
+  border: 1px solid black;
   position: absolute;
   top: 50%;
   left: 50%;
@@ -235,6 +234,7 @@ hr {
 .panel {
   font-size: 1rem;
 }
+
 
 
 /* Pop-up box */
@@ -401,6 +401,7 @@ footer p {
   font-size: 15px;
   color: red;
   font-weight: 400;
+
 }
 
 #error-panel {
