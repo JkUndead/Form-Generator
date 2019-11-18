@@ -396,3 +396,15 @@ footer p {
     margin: 0 8px;
   }
 }
+
+.invalid-feedback {
+  font-size: 15px;
+  color: red;
+  font-weight: 400;
+}
+
+#error-panel {
+  font-size: 15px;
+  color: red;
+  font-weight: 400;
+}

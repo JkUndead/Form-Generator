@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Form, Button } from 'react-bootstrap';
 import * as apiCalls from '../services/users_api'
 import Background_Img from "../images/background.jpg";
 
@@ -11,7 +12,9 @@ class LoginForm extends Component {
             path: "",
             errorMsg: "",
             userValid: false,
-            formValid: false
+            isExisted: false,
+            formValid: false,
+            validated: false
         };
         this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -56,24 +59,35 @@ class LoginForm extends Component {
     }
 
     async handleSubmit(event) {
-        //event.preventDefault();
-        const users = await apiCalls.getUsers();
+        const form = event.currentTarget;
         let msg = this.state.errorMsg;
         let user,
-            isExisted = false;
+            isExisted = this.state.isExisted;
+
+        if (form.checkValidity() === false || !isExisted) {
+            event.preventDefault();
+            event.stopPropagation();
+        }
+
+        this.setState({ validated: true });
+
+        const users = await apiCalls.getUsers();
         users.forEach(u => {
-            console.log(u)
             if (u.username.toLowerCase() === this.state.username.toLowerCase()
                 && u.role === this.state.role) {
                 user = u.username;
                 isExisted = true;
             }
         });
+        if (this.state.validated && !this.state.userValid) {
+            return;
+        }
         if (!isExisted) {
-            //event.preventDefault();
-            msg = "Error: User is not found";
-            this.setState({ errorMsg: msg })
-            console.log(user)
+            msg = "User can not be found";
+            this.setState({
+                errorMsg: msg,
+                isExisted: isExisted
+            })
         } else {
             this.setState({ username: user });
             console.log(this.state.username);
@@ -85,7 +99,12 @@ class LoginForm extends Component {
                 }
             })
         }
+
+
+
     }
+
+
 
 
     render() {
@@ -97,13 +116,7 @@ class LoginForm extends Component {
 
                     <div className="row justify-content-md-center d-flex align-items-center">
                         <div className="col-6">
-                            <div className='panel panel-default'>
-                                {!this.state.isExisted ?
-                                    <span>{this.state.errorMsg}</span> :
-                                    ""
-                                }
-                            </div>
-                            <form onSubmit={e => { e.preventDefault(); }}>
+                            {/* <form onSubmit={e => { e.preventDefault(); }}>
                                 <div className="form-group row">
                                     <label className="col-sm-4 col-md-4 col-form-label pr-0" htmlFor="username">Username: </label>
                                     <div className="col-sm-8 col-md-8 pl-0">
@@ -118,15 +131,45 @@ class LoginForm extends Component {
                                     </div>
                                 </div>
 
-                            </form>
-                            <div className="row justify-content-center mb-3">
-                                <button
-                                    disabled={!this.state.formValid}
-                                    className="btn btn-primary btn-lg text-center"
-                                    onClick={this.handleSubmit}
-                                >Search
-                            </button>
-                            </div>
+                            </form> */}
+                            <Form noValidate validated={this.state.validated} onSubmit={this.handleSubmit}>
+                                <Form.Group>
+                                    <Form.Row>
+                                        <Form.Label className="col-sm-4 col-md-4 pr-0" >Username: </Form.Label>
+                                        <Form.Control className="col-sm-8 col-md-8 pl-0 mb-2"
+                                            required
+                                            type="text"
+                                            id="username"
+                                            name="username"
+                                            value={this.state.username}
+                                            onChange={this.handleChange.bind(this)}
+                                            autoFocus
+                                        />
+                                        <Form.Control.Feedback type="invalid">
+                                            Username can not be blank
+                                        </Form.Control.Feedback>
+
+                                    </Form.Row>
+                                    <div className='panel panel-default' id="error-panel">
+                                        {(!this.state.isExisted && this.state.userValid) ?
+                                            <span>{this.state.errorMsg}</span> :
+                                            ""
+                                        }
+                                    </div>
+                                </Form.Group>
+
+                                <div className="row justify-content-center mb-3">
+                                    <Button
+                                        className="btn btn-primary btn-lg text-center"
+                                        //onClick={this.handleSubmit}
+                                        type="submit">
+                                        Search
+                                </Button>
+
+                                </div>
+
+                            </Form>
+
 
                         </div>
                     </div>
