@@ -19,10 +19,12 @@ class NewForm extends Component {
             elements: [],
             elementValues: {},
             managerList: [],
-            validValues: false,
+            nameValid: false,
+            emailValid: false,
             formValid: false,
             formErrors: {
-                message: ""
+                name: "",
+                email: "",
             }
         }
         this.handleChange = this.handleChange.bind(this);
@@ -51,7 +53,8 @@ class NewForm extends Component {
         if (name !== "userName" && name !== "email") {
             this.setState({ elementValues: { ...this.state.elementValues, [name]: value } });
         } else {
-            this.setState({ [name]: value })
+            this.setState({ [name]: value },
+                () => { this.validateField(name, value) })
         }
     }
 
@@ -69,6 +72,38 @@ class NewForm extends Component {
             setTimeout(() => {
                 resolve();
             }, 3000);
+        });
+    }
+
+    validateField(field, value) {
+        let fieldValidationErr = this.state.formErrors;
+        let nameValid = this.state.nameValid;
+        let emailValid = this.state.emailValid;
+        switch (field) {
+            case 'userName':
+                nameValid = value.length >= 3;
+                fieldValidationErr.name = nameValid ? "" : "is too short";
+                break;
+            case 'email':
+                emailValid = value.length > 5;
+                fieldValidationErr.email = emailValid ? "" : "is invalid";
+                break;
+            default:
+                break;
+        }
+        this.setState({
+            formErrors: fieldValidationErr,
+            nameValid: nameValid,
+            emailValid: emailValid
+        }, this.validateForm)
+    }
+
+    validateForm() {
+        this.setState({
+            formValid:
+                this.state.confirmation_status &&
+                this.state.nameValid &&
+                this.state.emailValid
         });
     }
 
@@ -145,7 +180,7 @@ class NewForm extends Component {
                                             onChange={() => {
                                                 this.setState(prevState => (
                                                     { confirmation_status: !prevState.confirmation_status }
-                                                ))
+                                                ), this.validateForm)
                                             }}
                                             required />
                                         <label className="form-check-label" htmlFor="declaration">I confirm the above information is accurate and followed terms and conditions </label>
@@ -176,6 +211,7 @@ class NewForm extends Component {
 
                                     }} >
                                         <button
+                                            disabled={!this.state.formValid}
                                             className="btn btn-primary float-right"
                                             onClick={this.handleSubmit}
                                         >Submit
