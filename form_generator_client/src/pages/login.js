@@ -112,7 +112,7 @@ class LoginForm extends Component {
             <div className="Homepage">
                 <img src={Background_Img} alt="background-img" className="Background" />
                 <div className="login-form" >
-                    <h1 className="text-center mt-4 mb-2">Please Enter Your User Name</h1>
+                    <h1 className="text-center mt-4 mb-2">Enter Your User Name</h1>
 
                     <div className="row justify-content-md-center d-flex align-items-center">
                         <div className="col-6">

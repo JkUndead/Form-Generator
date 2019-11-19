@@ -1,8 +1,8 @@
 html,
 body,
 .App,
-.App>div {
-  height: 100%
+.App > div {
+  height: 100%;
 }
 
 * {
@@ -64,10 +64,8 @@ ol span {
 
 ol span:hover {
   opacity: 1;
-  color: rgb(204, 0, 13)
+  color: rgb(204, 0, 13);
 }
-
-
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
@@ -89,7 +87,6 @@ code {
 /* Navbar */
 
 .navbar {
-
   margin-bottom: 0;
   background-color: #232020;
 
@@ -99,21 +96,20 @@ code {
   opacity: 0.9;
 }
 
-
 .navbar li {
   margin: 0 20px 0 20px;
 }
 
 .navbar a {
-  color: white
+  color: white;
 }
 
 .navbar a:hover {
-  color: rgb(204, 0, 13)
+  color: rgb(204, 0, 13);
 }
 
 .navbar .active {
-  color: rgb(204, 0, 13)
+  color: rgb(204, 0, 13);
 }
 
 /* Home page */
@@ -123,14 +119,11 @@ code {
 }
 
 .Background {
-
   /* Add the blur effect */
   filter: blur(8px);
   -webkit-filter: blur(8px);
 
-
   /* Full height */
-
 
   /* Center and scale the image nicely */
   background-position: relative;
@@ -193,7 +186,7 @@ h2 {
 #AboutUs h1,
 #AboutUs h4,
 .packages h4 {
-  color: rgb(204, 0, 13)
+  color: rgb(204, 0, 13);
 }
 
 hr {
@@ -214,18 +207,18 @@ hr {
 
 .login-form {
   font-size: 12px;
-  background-color: white;
+  background-color: rgba(255, 255, 255, 0.6);
   /* Fallback color */
   /* Black w/opacity/see-through */
   color: black;
   font-weight: bold;
-  border: 1px solid black;
+  /* border: 1px solid black; */
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   z-index: 2;
-  width: 50%;
+  width: 35%;
   padding: 20px;
   text-align: center;
 }
@@ -234,8 +227,6 @@ hr {
 .panel {
   font-size: 1rem;
 }
-
-
 
 /* Pop-up box */
 .popup {
@@ -266,18 +257,18 @@ hr {
 #sidebar-wrapper {
   min-height: 100vh;
   margin-left: -15rem;
-  -webkit-transition: margin .25s ease-out;
-  -moz-transition: margin .25s ease-out;
-  -o-transition: margin .25s ease-out;
-  transition: margin .25s ease-out;
+  -webkit-transition: margin 0.25s ease-out;
+  -moz-transition: margin 0.25s ease-out;
+  -o-transition: margin 0.25s ease-out;
+  transition: margin 0.25s ease-out;
   background-color: rgb(237, 234, 234);
 }
 
 #sidebar-wrapper .sidebar-heading {
   padding: 0.875rem 1.25rem;
   font-size: 1.2rem;
-  color: rgba(0, 0, 0, .8);
-  border-bottom: 3px solid rgb(204, 0, 13)
+  color: rgba(0, 0, 0, 0.8);
+  border-bottom: 3px solid rgb(204, 0, 13);
 }
 
 #sidebar-wrapper .list-group {
@@ -287,7 +278,7 @@ hr {
 
 #sidebar-wrapper .list-group-item {
   background-color: rgb(237, 234, 234);
-  font-size: 15px
+  font-size: 15px;
 }
 
 #sidebar-wrapper .list-group-item:hover {
@@ -338,7 +329,6 @@ hr {
   text-align: center;
 }
 
-
 .packages .grid li i {
   color: black;
 }
@@ -354,7 +344,6 @@ hr {
     padding: 20px;
   }
 }
-
 
 /*Footer Section*/
 
@@ -397,15 +386,9 @@ footer p {
   }
 }
 
-.invalid-feedback {
-  font-size: 15px;
-  color: red;
-  font-weight: 400;
-
-}
-
+.invalid-feedback,
 #error-panel {
   font-size: 15px;
   color: red;
-  font-weight: 400;
+  font-weight: 500;
 }
