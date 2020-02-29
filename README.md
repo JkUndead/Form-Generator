@@ -1,5 +1,7 @@
 # Form-Generator
 Form Flow (FYP)
+https://form-generator-client-jt.herokuapp.com/
+(PC only)
 
 # Installation Guide
 1. Go to form_generator_api, type in your terminal "npm install"
